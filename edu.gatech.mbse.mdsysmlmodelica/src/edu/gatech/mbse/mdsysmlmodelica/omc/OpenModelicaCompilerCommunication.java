@@ -282,9 +282,9 @@ public class OpenModelicaCompilerCommunication {
 		return executeCommand("getClassNames("+parentClassQName+", showProtected = true)");
 	}
 	
-	public String getClassNamesRecursive(String ownerName){
-		return executeCommand("getClassNamesRecursive(" + ownerName + ")");
-	}
+//	public String getClassNamesRecursive(String ownerName){
+//		return executeCommand("getClassNamesRecursive(" + ownerName + ")");
+//	}
 	
 	public String getClassInformation(String className){
 		return executeCommand("getClassInformation(" + className + ")");
@@ -315,27 +315,33 @@ public class OpenModelicaCompilerCommunication {
 	}
 	
 	public String getDeclarationEquation(String className, String componentName){
-		return executeCommand("getParameterValue(" + className+ "," + componentName + ")");
+		return executeCommand("getParameterValue(" + className+ ",\"" + componentName + "\")");	
+		// change in scripting API
+//		function getParameterValue
+//		  input TypeName class_;
+//		  input String parameterName;
+//		  output String parameterValue;
+//		end getParameterValue;
 	}
 	
-	public String getComponents(String className){
-		return executeCommand("getComponents(" + className + ")");
-	}
+//	public String getComponents(String className){
+//		return executeCommand("getComponents(" + className + ")");
+//	}
 	
-	public String getComponents(String className, String useDoubleQuotes){
-		return executeCommand("getComponents(" + className + ", " + useDoubleQuotes + ")");
-	}
+//	public String getComponents(String className, String useDoubleQuotes){
+//		return executeCommand("getComponents(" + className + ", " + useDoubleQuotes + ")");
+//	}
 	
-	public String getComponentNames(String className){
-		return executeCommand("getComponentNames(" + className + ")");
-	}
+//	public String getComponentNames(String className){
+//		return executeCommand("getComponentNames(" + className + ")");
+//	}
 	
 	public String getDocumentationAnnotation(String className){
 		return executeCommand("getDocumentationAnnotation(" + className + ")");
 	}			 
 	
 	public String getComponentModifierNames(String className, String componentName){
-		return executeCommand("getComponentModifierNames(" + className + ", " + componentName+ ")");
+		return executeCommand("getComponentModifierNames(" + className + ", \"" + componentName + "\")");
 	}
 	
 	public String getComponentModifierValue(String className, String componentName){
@@ -392,6 +398,7 @@ public class OpenModelicaCompilerCommunication {
 	
 	public boolean isReplaceable(String upperClassName, String nestedClassName){		
 		String isReplaceableStr = executeCommand("isReplaceable(" + upperClassName + ", \"" + nestedClassName + "\")");	
+		isReplaceableStr = isReplaceableStr.replace("\n", "");
 		return Boolean.parseBoolean(isReplaceableStr);
 	}	
 	
@@ -575,7 +582,7 @@ public class OpenModelicaCompilerCommunication {
 		if (count > 0 ) {
 			for (int i = 1; i <= count; i++) {
 				String reply = getNthEquation(className, String.valueOf(i)).trim();
-				if (!reply.equals("") && !reply.equals("Error") && !reply.equals("false")) {
+				if (!reply.equals("") && !reply.equals("\"\"") && !reply.equals("Error") && !reply.equals("false")) {
 					String string = StringHandler.removeFirstLastDoubleQuotes(reply.trim());
 					equations.add(replaceSpecChars(string));
 				}

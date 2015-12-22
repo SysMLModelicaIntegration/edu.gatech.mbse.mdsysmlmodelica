@@ -1731,7 +1731,20 @@ public class SysML2Modelica {
 			String decEqnString = (String) decEqnObject;
 
 			if (!decEqnString.equals(" ") & !decEqnString.equals("")) {
-				buffer.append("=" + decEqnString);
+				if(decEqnString.startsWith("\"")){
+					decEqnString = decEqnString.substring(1, decEqnString.length());
+				}
+				if(decEqnString.startsWith("\\")){
+					decEqnString = decEqnString.substring(1, decEqnString.length());
+				}
+				if(decEqnString.endsWith("\"")){
+					decEqnString = decEqnString.substring(0, decEqnString.length() - 1);
+				}
+				if(decEqnString.endsWith("\\\"")){ 
+					int lastIndex = decEqnString.lastIndexOf("\\\"");
+					decEqnString = decEqnString.substring(0, lastIndex) + "\"";
+				}
+				buffer.append(" = " + decEqnString);
 			}
 		}
 	}

@@ -69,11 +69,9 @@ parameter Real minV= 0;
 parameter Real maxV =          10; // Limits for output valve flow
 Real h(start = 0.0, unit = "m") "Tank level";
 equation
-assert(minV>=0,"minV - minimum Valve level must be
->= 0 ");
-der(h) = (qIn.lflow - qOut.lflow)/area; // Mass balance equation
-qOut.lflow = limitValue(minV, maxV, -
-flowGain*tActuator.act);
+assert(minV>=0,"minV - minimum Valve level must be >= 0 ");
+der(h) = (qIn.lflow - qOut.lflow)/area; 
+qOut.lflow = limitValue(minV, maxV, -flowGain*tActuator.act);
 tSensor.val = h;
 end Tank;
 

@@ -98,8 +98,9 @@ import edu.gatech.mbse.mdsysmlmodelica.omc.OpenModelicaCompilerCommunication;
 /**
  * ImportModelicaAction is responsible for transforming a Modelica model into a
  * SysML model. The user selects through a dialog the Modelica model to
- * transform into SysML. The transformation is based on the OpenModelicaCompiler to
- * parse the Modelica model and on the MagicDraw API to a corresponding SysML model.
+ * transform into SysML. The transformation is based on the OpenModelicaCompiler
+ * to parse the Modelica model and on the MagicDraw API to a corresponding SysML
+ * model.
  * 
  * @author Axel Reichwein
  */
@@ -196,8 +197,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	public ImportModelicaAction() {
 		super("", "Import Modelica", null, null);
 		properties = new PropertyManager();
-		properties.addProperty(new BooleanProperty(
-				PropertyID.SHOW_DIAGRAM_INFO, true));
+		properties.addProperty(new BooleanProperty(PropertyID.SHOW_DIAGRAM_INFO, true));
 
 	}
 
@@ -254,8 +254,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			rootPackage = model;
 
 			// load factory
-			magicDrawFactory = Application.getInstance().getProject()
-					.getElementsFactory();
+			magicDrawFactory = Application.getInstance().getProject().getElementsFactory();
 
 			// load SysML4Modelica profile
 			sysML4ModelicaProfile = getSysML4ModelicaProfile(project);
@@ -316,30 +315,24 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		logBuffer.append("\n\n\n\nUNRESOLVED GENERALIZATIONS\n");
 		for (Classifier classifier : unresolvedGeneralizations) {
 			if (!resolvedGeneralizations.contains(classifier)) {
-				String classifierQualifiedName = classifier.getQualifiedName()
-						.replaceAll("::", ".");
+				String classifierQualifiedName = classifier.getQualifiedName().replaceAll("::", ".");
 				logBuffer.append(classifierQualifiedName + "\n");
 			}
 		}
 
 		logBuffer.append("\n\n\nUNRESOLVED COMPONENTS\n");
-		for (ModelicaComponentData modelicaComponentData : unresolvedComponents
-				.keySet()) {
+		for (ModelicaComponentData modelicaComponentData : unresolvedComponents.keySet()) {
 
 			if (!resolvedComponents.containsKey(modelicaComponentData)) {
-				Classifier classifier = unresolvedComponents
-						.get(modelicaComponentData);
+				Classifier classifier = unresolvedComponents.get(modelicaComponentData);
 
 				// get property name and possible value
-				System.out.println("propertyName: "
-						+ modelicaComponentData.getName());
+				System.out.println("propertyName: " + modelicaComponentData.getName());
 				logBuffer.append(modelicaComponentData.getName() + "\t\t\t\t");
 
 				// get property type qualified name
-				System.out.println("propertyType qualifiedName: "
-						+ modelicaComponentData.getTypeQName());
-				logBuffer.append(modelicaComponentData.getTypeQName()
-						+ "\t\t\t\t");
+				System.out.println("propertyType qualifiedName: " + modelicaComponentData.getTypeQName());
+				logBuffer.append(modelicaComponentData.getTypeQName() + "\t\t\t\t");
 				logBuffer.append(classifier.getQualifiedName());
 				logBuffer.append("\n");
 			}
@@ -372,54 +365,34 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		modelicaBooleanType = getTypeFromProfile(project, "ModelicaBoolean");
 
 		// load SysML4Modelica Stereotypes
-		modelicaClassStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaClass");
-		modelicaPackageStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaPackage");
-		modelicaConnectorStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaConnector");
-		modelicaModelStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaModel");
-		modelicaBlockStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaBlock");
-		modelicaFunctionStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaFunction");
-		modelicaRecordStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaRecord");
-		modelicaTypeStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaType");
+		modelicaClassStereotype = StereotypesHelper.getStereotype(project, "ModelicaClass");
+		modelicaPackageStereotype = StereotypesHelper.getStereotype(project, "ModelicaPackage");
+		modelicaConnectorStereotype = StereotypesHelper.getStereotype(project, "ModelicaConnector");
+		modelicaModelStereotype = StereotypesHelper.getStereotype(project, "ModelicaModel");
+		modelicaBlockStereotype = StereotypesHelper.getStereotype(project, "ModelicaBlock");
+		modelicaFunctionStereotype = StereotypesHelper.getStereotype(project, "ModelicaFunction");
+		modelicaRecordStereotype = StereotypesHelper.getStereotype(project, "ModelicaRecord");
+		modelicaTypeStereotype = StereotypesHelper.getStereotype(project, "ModelicaType");
 
-		modelicaPortStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaPort");
-		modelicaPartStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaPart");
-		modelicaValuePropertyStereotype = StereotypesHelper.getStereotype(
-				project, "ModelicaValueProperty");
-		modelicaFunctionParameterStereotype = StereotypesHelper.getStereotype(
-				project, "ModelicaFunctionParameter");
+		modelicaPortStereotype = StereotypesHelper.getStereotype(project, "ModelicaPort");
+		modelicaPartStereotype = StereotypesHelper.getStereotype(project, "ModelicaPart");
+		modelicaValuePropertyStereotype = StereotypesHelper.getStereotype(project, "ModelicaValueProperty");
+		modelicaFunctionParameterStereotype = StereotypesHelper.getStereotype(project, "ModelicaFunctionParameter");
 
-		modelicaEquationStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaEquation");
-		modelicaAlgorithmStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaAlgorithm");
+		modelicaEquationStereotype = StereotypesHelper.getStereotype(project, "ModelicaEquation");
+		modelicaAlgorithmStereotype = StereotypesHelper.getStereotype(project, "ModelicaAlgorithm");
 
-		modelicaExtendsStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaExtends");
-		modelicaShortExtendsStereotype = StereotypesHelper.getStereotype(
-				project, "ModelicaShortExtends");
+		modelicaExtendsStereotype = StereotypesHelper.getStereotype(project, "ModelicaExtends");
+		modelicaShortExtendsStereotype = StereotypesHelper.getStereotype(project, "ModelicaShortExtends");
 
-		modelicaConnectionStereotype = StereotypesHelper.getStereotype(project,
-				"ModelicaConnection");
+		modelicaConnectionStereotype = StereotypesHelper.getStereotype(project, "ModelicaConnection");
 
 		// load NestedConnectorEnd SysML stereotype
-		nestedConnectorEndStereotype = StereotypesHelper.getStereotype(project,
-				"NestedConnectorEnd");
+		nestedConnectorEndStereotype = StereotypesHelper.getStereotype(project, "NestedConnectorEnd");
 
 		// load enumeration kinds
-		modelicaVariabilityKind = (Enumeration) getEnumeration(project,
-				"ModelicaVariabilityKind");
-		for (EnumerationLiteral enumerationLiteral : modelicaVariabilityKind
-				.getOwnedLiteral()) {
+		modelicaVariabilityKind = (Enumeration) getEnumeration(project, "ModelicaVariabilityKind");
+		for (EnumerationLiteral enumerationLiteral : modelicaVariabilityKind.getOwnedLiteral()) {
 			if (enumerationLiteral.getName().equals("constant")) {
 				modelicaConstantKind = enumerationLiteral;
 				continue;
@@ -438,10 +411,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			}
 		}
 
-		modelicaCausalityKind = (Enumeration) getEnumeration(project,
-				"ModelicaCausalityKind");
-		for (EnumerationLiteral enumerationLiteral : modelicaCausalityKind
-				.getOwnedLiteral()) {
+		modelicaCausalityKind = (Enumeration) getEnumeration(project, "ModelicaCausalityKind");
+		for (EnumerationLiteral enumerationLiteral : modelicaCausalityKind.getOwnedLiteral()) {
 			if (enumerationLiteral.getName().equals("input")) {
 				modelicaInputKind = enumerationLiteral;
 				continue;
@@ -452,10 +423,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			}
 		}
 
-		modelicaFlowFlagKind = (Enumeration) getEnumeration(project,
-				"ModelicaFlowFlagKind");
-		for (EnumerationLiteral enumerationLiteral : modelicaFlowFlagKind
-				.getOwnedLiteral()) {
+		modelicaFlowFlagKind = (Enumeration) getEnumeration(project, "ModelicaFlowFlagKind");
+		for (EnumerationLiteral enumerationLiteral : modelicaFlowFlagKind.getOwnedLiteral()) {
 			if (enumerationLiteral.getName().equals("flow")) {
 				modelicaFlowKind = enumerationLiteral;
 				continue;
@@ -466,10 +435,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			}
 		}
 
-		modelicaScopeKind = (Enumeration) getEnumeration(project,
-				"ModelicaScopeKind");
-		for (EnumerationLiteral enumerationLiteral : modelicaScopeKind
-				.getOwnedLiteral()) {
+		modelicaScopeKind = (Enumeration) getEnumeration(project, "ModelicaScopeKind");
+		for (EnumerationLiteral enumerationLiteral : modelicaScopeKind.getOwnedLiteral()) {
 			if (enumerationLiteral.getName().equals("inner")) {
 				modelicaInnerKind = enumerationLiteral;
 				continue;
@@ -480,10 +447,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			}
 		}
 
-		modelicaStateSelectKind = (Enumeration) getTypeFromProfile(project,
-				"ModelicaStateSelect");
-		for (EnumerationLiteral enumerationLiteral : modelicaStateSelectKind
-				.getOwnedLiteral()) {
+		modelicaStateSelectKind = (Enumeration) getTypeFromProfile(project, "ModelicaStateSelect");
+		for (EnumerationLiteral enumerationLiteral : modelicaStateSelectKind.getOwnedLiteral()) {
 			if (enumerationLiteral.getName().equals("default")) {
 				modelicaDefaultKind = enumerationLiteral;
 				continue;
@@ -536,17 +501,14 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			StereotypesHelper.addStereotype(class_, modelicaClassStereotype);
 		} else if (restriction.equals("connector")) {
 			class_ = magicDrawFactory.createClassInstance();
-			StereotypesHelper
-					.addStereotype(class_, modelicaConnectorStereotype);
+			StereotypesHelper.addStereotype(class_, modelicaConnectorStereotype);
 		} else if (restriction.equals("enumeration")) {
 			// TODO
 		} else if (restriction.equals("expandable connector")) {
 			class_ = magicDrawFactory.createClassInstance();
-			StereotypesHelper
-					.addStereotype(class_, modelicaConnectorStereotype);
+			StereotypesHelper.addStereotype(class_, modelicaConnectorStereotype);
 			StereotypesHelper.setStereotypePropertyValue(class_,
-					(Stereotype) class_.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "isExpandable", true);
+					(Stereotype) class_.getAppliedStereotypeInstance().getClassifier().get(0), "isExpandable", true);
 		} else if (restriction.equals("function")) {
 			class_ = magicDrawFactory.createFunctionBehaviorInstance();
 			StereotypesHelper.addStereotype(class_, modelicaFunctionStereotype);
@@ -634,19 +596,22 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			}
 		}
 
-		classQualifiedName = classQualifiedName.replace("." + className, "");
+		// classQualifiedName can contain twice the same string
+		// example: Modelica.Blocks.Icons.Block
+		// remove only the last instance in the string
+		if (classQualifiedName.contains("." + className)) {
+			classQualifiedName = classQualifiedName.substring(0, classQualifiedName.lastIndexOf("." + className));
+		}
+		// classQualifiedName = classQualifiedName.replace("." + className, "");
 
 	}
 
 	private static void importExternalFuntion(Classifier class_) {
 		if (class_ instanceof FunctionBehavior) {
 
-			String classifierQualidfiedName = class_.getQualifiedName()
-					.replaceAll("::", ".");
-			String externalFunctionInformation = omc
-					.getExternalFunctionSpecification(classifierQualidfiedName);
-			ArrayList<String> classInformationList = StringHandler
-					.unparseStrings(externalFunctionInformation);
+			String classifierQualidfiedName = class_.getQualifiedName().replaceAll("::", ".");
+			String externalFunctionInformation = omc.getExternalFunctionSpecification(classifierQualidfiedName);
+			ArrayList<String> classInformationList = StringHandler.unparseStrings(externalFunctionInformation);
 
 			if (classInformationList.size() > 5) {
 				String language = classInformationList.get(0);
@@ -658,8 +623,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 				functionBehavior.getLanguage().add(language);
 				functionBehavior.getBody().add(function);
 
-				String externalLibraries = omc.getNamedAnnotation(class_
-						.getQualifiedName().replaceAll("::", "."), "Library");
+				String externalLibraries = omc.getNamedAnnotation(class_.getQualifiedName().replaceAll("::", "."),
+						"Library");
 				externalLibraries = externalLibraries.replace("{", "");
 				externalLibraries = externalLibraries.replace("}", "");
 				String[] externalLibrariesArray = externalLibraries.split(",");
@@ -668,9 +633,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 					string = string.replaceAll("\"", "");
 					string = string.replace("\n", "");
 					StereotypesHelper.setStereotypePropertyValue(class_,
-							(Stereotype) class_.getAppliedStereotypeInstance()
-									.getClassifier().get(0), "externalLibrary",
-							string, true);
+							(Stereotype) class_.getAppliedStereotypeInstance().getClassifier().get(0),
+							"externalLibrary", string, true);
 
 				}
 			}
@@ -678,16 +642,13 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	}
 
 	private static void importInheritedClasses(Classifier owner) {
-		String ownerQualifiedName = owner.getQualifiedName().replaceAll("::",
-				".");
+		String ownerQualifiedName = owner.getQualifiedName().replaceAll("::", ".");
 
-		List<String> inheritedClasses = omc
-				.getInheritedClasses(ownerQualifiedName);
+		List<String> inheritedClasses = omc.getInheritedClasses(ownerQualifiedName);
 		boolean allGeneralizationsResolved = true;
 		for (String inheritedClass : inheritedClasses) {
 
-			if (inheritedClass
-					.equals("SysML4Modelica.Types.ModelicaPredefinedTypes.ModelicaReal")) {
+			if (inheritedClass.equals("SysML4Modelica.Types.ModelicaPredefinedTypes.ModelicaReal")) {
 				inheritedClass = "Real";
 			}
 
@@ -696,52 +657,40 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			Classifier generalizedClass = (Classifier) getType(inheritedClassMDQFT);
 
 			if (generalizedClass != null) {
-				Generalization generalization = magicDrawFactory
-						.createGeneralizationInstance();
-				generalization.setGeneral(generalizedClass);
-				generalization.setSpecific(owner);
-				owner.getGeneralization().add(generalization);
-
-				Stereotype extendsStereotype;
-				if (omc.isShortDefinition(ownerQualifiedName)) {
-					StereotypesHelper.addStereotype(generalization,
-							modelicaShortExtendsStereotype);
-					extendsStereotype = modelicaShortExtendsStereotype;
-				} else {
-					StereotypesHelper.addStereotype(generalization,
-							modelicaExtendsStereotype);
-					extendsStereotype = modelicaExtendsStereotype;
-				}
-
+				// reflective generalization is not possible in SysML and
+				// MagicDraw (corrupt element)
+				if (!generalizedClass.getQualifiedName().equals(owner.getQualifiedName())) {
+					Generalization generalization = magicDrawFactory.createGeneralizationInstance();
+					generalization.setGeneral(generalizedClass);
+					generalization.setSpecific(owner);
+					owner.getGeneralization().add(generalization);
+					Stereotype extendsStereotype;
+					if (omc.isShortDefinition(ownerQualifiedName)) {
+						StereotypesHelper.addStereotype(generalization, modelicaShortExtendsStereotype);
+						extendsStereotype = modelicaShortExtendsStereotype;
+					} else {
+						StereotypesHelper.addStereotype(generalization, modelicaExtendsStereotype);
+						extendsStereotype = modelicaExtendsStereotype;
+					}
+				
+				
 				// modifications
-				String extendsModificationName = omc.getExtendsModifierNames(
-						ownerQualifiedName, inheritedClass);
+				String extendsModificationName = omc.getExtendsModifierNames(ownerQualifiedName, inheritedClass);
 				if (extendsModificationName.contains("{")) {
-					extendsModificationName = extendsModificationName.replace(
-							"{", "");
-					extendsModificationName = extendsModificationName.replace(
-							"}", "");
-					extendsModificationName = extendsModificationName
-							.replaceAll(" ", "");
-					String[] modificationNamesArray = extendsModificationName
-							.split(",");
+					extendsModificationName = extendsModificationName.replace("{", "");
+					extendsModificationName = extendsModificationName.replace("}", "");
+					extendsModificationName = extendsModificationName.replaceAll(" ", "");
+					String[] modificationNamesArray = extendsModificationName.split(",");
 
 					for (String modificationName : modificationNamesArray) {
 						if (!modificationName.equals("\n")) {
-							String modificationValue = omc
-									.getExtendsModifierValue(
-											ownerQualifiedName, inheritedClass,
-											modificationName);
-							modificationValue = modificationValue.replace("\n",
-									"");
-							modificationName = modificationName.replace("\n",
-									"");
-							if (!modificationName.equals("")
-									& !modificationValue.contains("Error")) {
-								StereotypesHelper.setStereotypePropertyValue(
-										generalization, extendsStereotype,
-										"modification", modificationName
-												+ modificationValue, true);
+							String modificationValue = omc.getExtendsModifierValue(ownerQualifiedName, inheritedClass,
+									modificationName);
+							modificationValue = modificationValue.replace("\n", "");
+							modificationName = modificationName.replace("\n", "");
+							if (!modificationName.equals("") & !modificationValue.contains("Error")) {
+								StereotypesHelper.setStereotypePropertyValue(generalization, extendsStereotype,
+										"modification", modificationName + modificationValue, true);
 							}
 						}
 
@@ -750,10 +699,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 				// causality
 				if (extendsStereotype == modelicaShortExtendsStereotype) {
-					String shortClassInformation = omc
-							.getShortDefinitionBaseClassInformation(ownerQualifiedName);
-					ArrayList<String> classInformationList = StringHandler
-							.unparseStrings(shortClassInformation);
+					String shortClassInformation = omc.getShortDefinitionBaseClassInformation(ownerQualifiedName);
+					ArrayList<String> classInformationList = StringHandler.unparseStrings(shortClassInformation);
 					if (classInformationList.size() == 6) {
 						String causality = classInformationList.get(4);
 						causality = causality.replace("{", "");
@@ -761,37 +708,29 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 						causality = causality.replaceAll("\"", "");
 						if (!causality.equals("")) {
 							if (causality.equals("input")) {
-								StereotypesHelper.setStereotypePropertyValue(
-										generalization,
-										modelicaShortExtendsStereotype,
-										"causality", modelicaInputKind);
+								StereotypesHelper.setStereotypePropertyValue(generalization,
+										modelicaShortExtendsStereotype, "causality", modelicaInputKind);
 							} else if (causality.equals("output")) {
-								StereotypesHelper.setStereotypePropertyValue(
-										generalization,
-										modelicaShortExtendsStereotype,
-										"causality", modelicaOutputKind);
+								StereotypesHelper.setStereotypePropertyValue(generalization,
+										modelicaShortExtendsStereotype, "causality", modelicaOutputKind);
 							}
 						}
 
 					}
 				}
-
+				
 				// TODO: visibility
 
 				// arraysize
-				String classInformation = omc.getClassInformation(owner
-						.getQualifiedName().replace("::", "."));
+				String classInformation = omc.getClassInformation(owner.getQualifiedName().replace("::", "."));
 				if (!classInformation.equals("error\n")) {
 
 					int lastCommaIndex = classInformation.lastIndexOf("{");
-					classInformation = classInformation.substring(
-							lastCommaIndex + 1, classInformation.length());
-					String newClassInformation = classInformation.replaceAll(
-							"\n", "");
+					classInformation = classInformation.substring(lastCommaIndex + 1, classInformation.length());
+					String newClassInformation = classInformation.replaceAll("\n", "");
 					// newClassInformation = newClassInformation.replaceAll("{",
 					// "");
-					newClassInformation = newClassInformation.replaceAll("}",
-							"");
+					newClassInformation = newClassInformation.replaceAll("}", "");
 
 					String[] arraySizes = newClassInformation.split(",");
 
@@ -813,21 +752,21 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 					for (String string : arraySizes) {
 						// check if string matches an Integer, otherwise warning
 						try {
-							if (!string.contains("none")
-									& !string.contains("parameter")
-									& !string.equals("")) {
+							if (!string.contains("none") & !string.contains("parameter") & !string.equals("")
+									& !string.equals(")")) {
 								// if (Integer.valueOf(string) != null) {
-								StereotypesHelper.setStereotypePropertyValue(
-										generalization, extendsStereotype,
+								StereotypesHelper.setStereotypePropertyValue(generalization, extendsStereotype,
 										"arraySize", string, true);
 							}
 							// else {
 							// System.err
-							// .println("WARNING: Component ArraySize Dimension not an Integer!");
+							// .println("WARNING: Component ArraySize Dimension
+							// not an Integer!");
 							// }
 						} catch (Exception e) {
 						}
 					}
+				}
 				}
 			} else {
 				unresolvedGeneralizations.add(owner);
@@ -843,8 +782,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 	private static void importNestedClasses(Classifier class_) {
 
-		String classQualifiedName = class_.getQualifiedName().replaceAll("::",
-				".");
+		String classQualifiedName = class_.getQualifiedName().replaceAll("::", ".");
 		String classNames = omc.getClassNamesWithProtected(classQualifiedName);
 		classNames = classNames.replace("{", "");
 		classNames = classNames.replace("}", "");
@@ -862,10 +800,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	}
 
 	private static void importClassComponents(Classifier class_) {
-		String classQualifiedName2 = class_.getQualifiedName().replaceAll("::",
-				".");
-		ArrayList<ModelicaComponentData> componentDataList = omc
-				.getComponentData(classQualifiedName2);
+		String classQualifiedName2 = class_.getQualifiedName().replaceAll("::", ".");
+		ArrayList<ModelicaComponentData> componentDataList = omc.getComponentData(classQualifiedName2);
 		for (ModelicaComponentData modelicaComponentData : componentDataList) {
 			importClassComponent(modelicaComponentData, class_);
 		}
@@ -874,16 +810,14 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	private static void importEnumerationLiterals(Classifier class_) {
 		if (class_ instanceof Enumeration) {
 			Enumeration enumeration = (Enumeration) class_;
-			String enumerationLiterals = omc.getEnumerationLiterals(class_
-					.getQualifiedName().replaceAll("::", "."));
+			String enumerationLiterals = omc.getEnumerationLiterals(class_.getQualifiedName().replaceAll("::", "."));
 			enumerationLiterals = enumerationLiterals.replace("{", "");
 			enumerationLiterals = enumerationLiterals.replace("}", "");
 			String[] enumerationLiteralsArray = enumerationLiterals.split(",");
 			for (String enumLiteral : enumerationLiteralsArray) {
 				enumLiteral = enumLiteral.replace("\"", "");
 				if (!enumLiteral.equals("\n")) {
-					EnumerationLiteral enumerationLiteral = magicDrawFactory
-							.createEnumerationLiteralInstance();
+					EnumerationLiteral enumerationLiteral = magicDrawFactory.createEnumerationLiteralInstance();
 					enumerationLiteral.setName(enumLiteral);
 					enumeration.getOwnedLiteral().add(enumerationLiteral);
 				}
@@ -892,8 +826,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	}
 
 	private static boolean hasEnumerationLiterals(String classQualifiedName) {
-		String enumerationLiterals = omc
-				.getEnumerationLiterals(classQualifiedName);
+		String enumerationLiterals = omc.getEnumerationLiterals(classQualifiedName);
 		if (enumerationLiterals != null) {
 			enumerationLiterals = enumerationLiterals.replace("{", "");
 			enumerationLiterals = enumerationLiterals.replace("}", "");
@@ -905,42 +838,34 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	}
 
 	private static void importImportStatements(Classifier class_) {
-		String classifierQualifiedName = class_.getQualifiedName().replaceAll(
-				"::", ".");
+		String classifierQualifiedName = class_.getQualifiedName().replaceAll("::", ".");
 		int importStatementsCount = omc.getImportCount(classifierQualifiedName);
 
 		for (int i = 1; i < importStatementsCount + 1; i++) {
-			String importStatement = omc.getNthImport(classifierQualifiedName,
-					i);
+			String importStatement = omc.getNthImport(classifierQualifiedName, i);
 			importStatement = importStatement.replace("{", "");
 			importStatement = importStatement.replace("}", "");
-			if (importStatement.equals("\n") & i == 1
-					& importStatementsCount == 1) {
+			if (importStatement.equals("\n") & i == 1 & importStatementsCount == 1) {
 				importStatement = omc.getNthImport(classifierQualifiedName, 2);
 				importStatement = importStatement.replace("{", "");
 				importStatement = importStatement.replace("}", "");
 			}
 			if (!importStatement.equals("\n")) {
 				String[] importStatementArray = importStatement.split(",");
-				String importedNamespace = importStatementArray[0].replaceAll(
-						"\"", "");
-				String newNamespace = importStatementArray[1].replaceAll("\"",
-						"");
-				String importStatementType = importStatementArray[2]
-						.replaceAll("\"", "");
+				String importedNamespace = importStatementArray[0].replaceAll("\"", "");
+				String newNamespace = importStatementArray[1].replaceAll("\"", "");
+				String importStatementType = importStatementArray[2].replaceAll("\"", "");
 
 				if (importStatementType.contains("named")) {
 					importMappings.put(newNamespace, importedNamespace);
 					Comment comment = magicDrawFactory.createCommentInstance();
-					String namedImport = "import "
-							+ newNamespace.replaceAll("\"", "") + " = "
+					String namedImport = "import " + newNamespace.replaceAll("\"", "") + " = "
 							+ importedNamespace.replaceAll("\"", "");
 					comment.setBody(namedImport);
 					class_.getOwnedComment().add(comment);
 				} else if (importStatementType.contains("qualified")) {
 					Comment comment = magicDrawFactory.createCommentInstance();
-					String qualifiedImport = "import "
-							+ importedNamespace.replaceAll("\"", "");
+					String qualifiedImport = "import " + importedNamespace.replaceAll("\"", "");
 					comment.setBody(qualifiedImport);
 					class_.getOwnedComment().add(comment);
 				}
@@ -950,16 +875,14 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 	private static void importClassInitialAlgorithms(Class class_) {
 		for (String algorithm : omc.getInitialAlgorithms(classQualifiedName)) {
-			OpaqueBehavior opaqueBehavior = magicDrawFactory
-					.createOpaqueBehaviorInstance();
+			OpaqueBehavior opaqueBehavior = magicDrawFactory.createOpaqueBehaviorInstance();
 			algorithm = algorithm.substring(0, algorithm.lastIndexOf("\n"));
 			opaqueBehavior.getBody().add(algorithm);
 			opaqueBehavior.getLanguage().add(new String("Modelica"));
-			StereotypesHelper.addStereotype(opaqueBehavior,
-					modelicaAlgorithmStereotype);
+			StereotypesHelper.addStereotype(opaqueBehavior, modelicaAlgorithmStereotype);
 			class_.getOwnedBehavior().add(opaqueBehavior);
-			StereotypesHelper.setStereotypePropertyValue(opaqueBehavior,
-					modelicaAlgorithmStereotype, "isInitial", true);
+			StereotypesHelper.setStereotypePropertyValue(opaqueBehavior, modelicaAlgorithmStereotype, "isInitial",
+					true);
 		}
 	}
 
@@ -976,19 +899,22 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 			// create SysML constraint
 			Constraint constraint = magicDrawFactory.createConstraintInstance();
-			OpaqueExpression opaqueExpression = magicDrawFactory
-					.createOpaqueExpressionInstance();
+			OpaqueExpression opaqueExpression = magicDrawFactory.createOpaqueExpressionInstance();
 			// equation = equation.replaceFirst(";", "");
-			equation = equation.substring(0, equation.lastIndexOf("\n"));
+			if (equation.contains("\n")) {
+				equation = equation.substring(0, equation.lastIndexOf("\n"));
+			}
+			// else{
+			// equation = equation.substring(0, equation.lastIndexOf("\n"));
+			// }
+
 			opaqueExpression.getBody().add(equation);
 			opaqueExpression.getLanguage().add(new String("Modelica"));
 			constraint.setSpecification(opaqueExpression);
-			StereotypesHelper.addStereotype(constraint,
-					modelicaEquationStereotype);
+			StereotypesHelper.addStereotype(constraint, modelicaEquationStereotype);
 			class_.getOwnedRule().add(constraint);
 
-			StereotypesHelper.setStereotypePropertyValue(constraint,
-					modelicaEquationStereotype, "isInitial", true);
+			StereotypesHelper.setStereotypePropertyValue(constraint, modelicaEquationStereotype, "isInitial", true);
 		}
 	}
 
@@ -996,52 +922,45 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 		String className = class_.getName();
 		String classInformation = omc.getClassInformation(classQualifiedName);
-		ArrayList<String> classInformationList = StringHandler
-				.unparseStrings(classInformation);
+		ArrayList<String> classInformationList = StringHandler.unparseStrings(classInformation);
 		boolean isFinal = false;
 		boolean isPartial = false;
 		boolean isEncapsulated = false;
-		if (classInformationList.size() == 10) {
-			String classDefinitionAttributes = classInformationList.get(3);
-			classDefinitionAttributes = classDefinitionAttributes.replace("{",
-					"");
-			classDefinitionAttributes = classDefinitionAttributes.replace("}",
-					"");
-			String[] classDefinitionAttributesArray = classDefinitionAttributes
-					.split(",");
+		if (classInformationList.size() == 11) {
+			String classDefinitionAttributes = classInformationList.toString();
+			classDefinitionAttributes = classDefinitionAttributes.replace("[", "");
+			classDefinitionAttributes = classDefinitionAttributes.replace("]", "");
+			String[] classDefinitionAttributesArray = classDefinitionAttributes.split(",");
 
-			String isFinalString = classDefinitionAttributesArray[1];
+			String isFinalString = classDefinitionAttributesArray[3];
+			isFinalString = isFinalString.replace(" ", "");
 			isFinal = Boolean.valueOf(isFinalString);
-			String isPartialString = classDefinitionAttributesArray[0];
+			String isPartialString = classDefinitionAttributesArray[2];
+			isPartialString = isPartialString.replace(" ", "");
 			isPartial = Boolean.valueOf(isPartialString);
-			String isEncapsulatedString = classDefinitionAttributesArray[2];
+			String isEncapsulatedString = classDefinitionAttributesArray[4];
+			isEncapsulatedString = isEncapsulatedString.replace(" ", "");
 			isEncapsulated = Boolean.valueOf(isEncapsulatedString);
 		}
 
 		StereotypesHelper.setStereotypePropertyValue(class_,
-				(Stereotype) class_.getAppliedStereotypeInstance()
-						.getClassifier().get(0), "isFinal", isFinal);
+				(Stereotype) class_.getAppliedStereotypeInstance().getClassifier().get(0), "isFinal", isFinal);
 
 		StereotypesHelper.setStereotypePropertyValue(class_,
-				(Stereotype) class_.getAppliedStereotypeInstance()
-						.getClassifier().get(0), "isPartial", isPartial);
+				(Stereotype) class_.getAppliedStereotypeInstance().getClassifier().get(0), "isPartial", isPartial);
 
 		StereotypesHelper.setStereotypePropertyValue(class_,
-				(Stereotype) class_.getAppliedStereotypeInstance()
-						.getClassifier().get(0), "isModelicaEncapsulated",
+				(Stereotype) class_.getAppliedStereotypeInstance().getClassifier().get(0), "isModelicaEncapsulated",
 				isEncapsulated);
 
 		NamedElement ownerNamedElement = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement) class_
 				.getOwner();
-		String ownerQualifiedName = ownerNamedElement.getQualifiedName()
-				.replaceAll("::", ".");
-		boolean isReplaceable = omc
-				.isReplaceable(ownerQualifiedName, className);
+		String ownerQualifiedName = ownerNamedElement.getQualifiedName().replaceAll("::", ".");
+		boolean isReplaceable = omc.isReplaceable(ownerQualifiedName, className);
 
 		if (isReplaceable) {
 			StereotypesHelper.setStereotypePropertyValue(class_,
-					(Stereotype) class_.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "isReplaceable",
+					(Stereotype) class_.getAppliedStereotypeInstance().getClassifier().get(0), "isReplaceable",
 					isReplaceable);
 		}
 	}
@@ -1049,12 +968,10 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	private static void importClassAlgorithms(Class class_) {
 
 		for (String algorithm : omc.getAlgorithms(classQualifiedName)) {
-			OpaqueBehavior opaqueBehavior = magicDrawFactory
-					.createOpaqueBehaviorInstance();
+			OpaqueBehavior opaqueBehavior = magicDrawFactory.createOpaqueBehaviorInstance();
 			opaqueBehavior.getBody().add(algorithm);
 			opaqueBehavior.getLanguage().add(new String("Modelica"));
-			StereotypesHelper.addStereotype(opaqueBehavior,
-					modelicaAlgorithmStereotype);
+			StereotypesHelper.addStereotype(opaqueBehavior, modelicaAlgorithmStereotype);
 			class_.getOwnedBehavior().add(opaqueBehavior);
 		}
 	}
@@ -1077,20 +994,17 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 			// create SysML constraint
 			Constraint constraint = magicDrawFactory.createConstraintInstance();
-			OpaqueExpression opaqueExpression = magicDrawFactory
-					.createOpaqueExpressionInstance();
+			OpaqueExpression opaqueExpression = magicDrawFactory.createOpaqueExpressionInstance();
 			opaqueExpression.getBody().add(equation);
 			opaqueExpression.getLanguage().add(new String("Modelica"));
 			constraint.setSpecification(opaqueExpression);
-			StereotypesHelper.addStereotype(constraint,
-					modelicaEquationStereotype);
+			StereotypesHelper.addStereotype(constraint, modelicaEquationStereotype);
 			class_.getOwnedRule().add(constraint);
 		}
 	}
 
 	public static void importClassConnections(Classifier class_) {
-		for (String connection : omc.getConnections(class_.getQualifiedName()
-				.replaceAll("::", "."))) {
+		for (String connection : omc.getConnections(class_.getQualifiedName().replaceAll("::", "."))) {
 			connection = connection.replaceAll("\\{", "");
 			connection = connection.replaceAll("\\}", "");
 			connection = connection.replaceAll(String.valueOf('"'), "");
@@ -1099,8 +1013,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 				continue;
 			}
 
-			ModelicaConnectionData modelicaConnectionData = new ModelicaConnectionData(
-					connection, class_);
+			ModelicaConnectionData modelicaConnectionData = new ModelicaConnectionData(connection, class_);
 
 			String[] connectorEnds = connection.split(",");
 			String[] connectorEnd1Str = connectorEnds[0].split("\\.");
@@ -1144,34 +1057,27 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 					Type part1Type = part1.getType();
 					Type part2Type = part2.getType();
 
-					port1 = getProperty((Class) part1Type,
-							connectorEnd1PortName);
-					port2 = getProperty((Class) part2Type,
-							connectorEnd2PortName);
+					port1 = getProperty((Class) part1Type, connectorEnd1PortName);
+					port2 = getProperty((Class) part2Type, connectorEnd2PortName);
 
 					if ((port1 != null) & (port2 != null)) {
 
 						// create SysML connector
-						Connector connector = magicDrawFactory
-								.createConnectorInstance();
+						Connector connector = magicDrawFactory.createConnectorInstance();
 
 						ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
 						ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
 
 						connectorEnd1.setPartWithPort(part1);
 						connectorEnd1.setRole(port1);
-						StereotypesHelper.addStereotype(connectorEnd1,
-								nestedConnectorEndStereotype);
-						StereotypesHelper.setStereotypePropertyValue(
-								connectorEnd1, nestedConnectorEndStereotype,
+						StereotypesHelper.addStereotype(connectorEnd1, nestedConnectorEndStereotype);
+						StereotypesHelper.setStereotypePropertyValue(connectorEnd1, nestedConnectorEndStereotype,
 								"propertyPath", part1);
 
 						connectorEnd2.setPartWithPort(part2);
 						connectorEnd2.setRole(port2);
-						StereotypesHelper.addStereotype(connectorEnd2,
-								nestedConnectorEndStereotype);
-						StereotypesHelper.setStereotypePropertyValue(
-								connectorEnd2, nestedConnectorEndStereotype,
+						StereotypesHelper.addStereotype(connectorEnd2, nestedConnectorEndStereotype);
+						StereotypesHelper.setStereotypePropertyValue(connectorEnd2, nestedConnectorEndStereotype,
 								"propertyPath", part2);
 
 						connector.setName(connection);
@@ -1180,8 +1086,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 						if (class_ instanceof Class) {
 							Class class2 = (Class) class_;
 							class2.getOwnedConnector().add(connector);
-							StereotypesHelper.addStereotype(connector,
-									modelicaConnectionStereotype);
+							StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 						}
 					} else {
 						// resolve connections at second traversal
@@ -1199,15 +1104,13 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 				if (part1 != null) {
 					Type part1Type = part1.getType();
 
-					port1 = getProperty((Class) part1Type,
-							connectorEnd1PortName);
+					port1 = getProperty((Class) part1Type, connectorEnd1PortName);
 					port2 = getProperty(class_, connectorEnd2PortName);
 
 					if ((port1 != null) & (port2 != null)) {
 
 						// create SysML connector
-						Connector connector = magicDrawFactory
-								.createConnectorInstance();
+						Connector connector = magicDrawFactory.createConnectorInstance();
 
 						ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
 						ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
@@ -1223,8 +1126,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 							Class class2 = (Class) class_;
 							class2.getOwnedConnector().add(connector);
 
-							StereotypesHelper.addStereotype(connector,
-									modelicaConnectionStereotype);
+							StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 						}
 
 					} else {
@@ -1244,15 +1146,13 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 				if (part2 != null) {
 					Type part2Type = part2.getType();
 
-					port2 = getProperty((Class) part2Type,
-							connectorEnd2PortName);
+					port2 = getProperty((Class) part2Type, connectorEnd2PortName);
 					port1 = getProperty(class_, connectorEnd1PortName);
 
 					if ((port1 != null) & (port2 != null)) {
 
 						// create SysML connector
-						Connector connector = magicDrawFactory
-								.createConnectorInstance();
+						Connector connector = magicDrawFactory.createConnectorInstance();
 
 						ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
 						ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
@@ -1268,8 +1168,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 							Class class2 = (Class) class_;
 							class2.getOwnedConnector().add(connector);
 
-							StereotypesHelper.addStereotype(connector,
-									modelicaConnectionStereotype);
+							StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 						}
 					} else {
 						// resolve connections at second traversal
@@ -1291,8 +1190,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 				if ((port1 != null) & (port2 != null)) {
 
 					// create SysML connector
-					Connector connector = magicDrawFactory
-							.createConnectorInstance();
+					Connector connector = magicDrawFactory.createConnectorInstance();
 
 					ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
 					ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
@@ -1307,8 +1205,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 						Class class2 = (Class) class_;
 						class2.getOwnedConnector().add(connector);
 
-						StereotypesHelper.addStereotype(connector,
-								modelicaConnectionStereotype);
+						StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 					}
 				} else {
 					// resolve connections at second traversal
@@ -1321,12 +1218,10 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		}
 	}
 
-	public static void importClassConnection(
-			ModelicaConnectionData modelicaConnectionData) {
+	public static void importClassConnection(ModelicaConnectionData modelicaConnectionData) {
 		String specificConnection = modelicaConnectionData.getConnection();
 		Class class_ = (Class) modelicaConnectionData.getClassifier();
-		for (String connection : omc.getConnections(class_.getQualifiedName()
-				.replaceAll("::", "."))) {
+		for (String connection : omc.getConnections(class_.getQualifiedName().replaceAll("::", "."))) {
 			connection = connection.replaceAll("\\{", "");
 			connection = connection.replaceAll("\\}", "");
 			connection = connection.replaceAll(String.valueOf('"'), "");
@@ -1377,34 +1272,23 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 						Type part1Type = part1.getType();
 						Type part2Type = part2.getType();
 
-						port1 = getProperty((Class) part1Type,
-								connectorEnd1PortName);
-						port2 = getProperty((Class) part2Type,
-								connectorEnd2PortName);
+						port1 = getProperty((Class) part1Type, connectorEnd1PortName);
+						port2 = getProperty((Class) part2Type, connectorEnd2PortName);
 
 						if ((port1 != null) & (port2 != null)) {
 							// create SysML connector
-							Connector connector = magicDrawFactory
-									.createConnectorInstance();
-							ConnectorEnd connectorEnd1 = connector.getEnd()
-									.get(0);
-							ConnectorEnd connectorEnd2 = connector.getEnd()
-									.get(1);
+							Connector connector = magicDrawFactory.createConnectorInstance();
+							ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
+							ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
 							connectorEnd1.setPartWithPort(part1);
 							connectorEnd1.setRole(port1);
-							StereotypesHelper.addStereotype(connectorEnd1,
-									nestedConnectorEndStereotype);
-							StereotypesHelper.setStereotypePropertyValue(
-									connectorEnd1,
-									nestedConnectorEndStereotype,
+							StereotypesHelper.addStereotype(connectorEnd1, nestedConnectorEndStereotype);
+							StereotypesHelper.setStereotypePropertyValue(connectorEnd1, nestedConnectorEndStereotype,
 									"propertyPath", part1);
 							connectorEnd2.setPartWithPort(part2);
 							connectorEnd2.setRole(port2);
-							StereotypesHelper.addStereotype(connectorEnd2,
-									nestedConnectorEndStereotype);
-							StereotypesHelper.setStereotypePropertyValue(
-									connectorEnd2,
-									nestedConnectorEndStereotype,
+							StereotypesHelper.addStereotype(connectorEnd2, nestedConnectorEndStereotype);
+							StereotypesHelper.setStereotypePropertyValue(connectorEnd2, nestedConnectorEndStereotype,
 									"propertyPath", part2);
 							connector.setName(connection);
 							// connector.
@@ -1412,95 +1296,69 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 							if (class_ instanceof Class) {
 								Class class2 = (Class) class_;
 								class2.getOwnedConnector().add(connector);
-								StereotypesHelper.addStereotype(connector,
-										modelicaConnectionStereotype);
+								StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 							}
-							if (unresolvedConnections
-									.contains(modelicaConnectionData)) {
+							if (unresolvedConnections.contains(modelicaConnectionData)) {
 								if (class_ instanceof Class) {
 									Class class2 = (Class) class_;
-									resolvedConnections
-											.add(modelicaConnectionData);
+									resolvedConnections.add(modelicaConnectionData);
 								}
 							}
 						} else {
 							// ControlBus and AxisControlBus are empty
 							// connectors that need to be handled specially
 							if (part1Type.getName().equals("ControlBus")
-									| part1Type.getName().equals(
-											"AxisControlBus")) {
-								port2 = getProperty((Class) part2Type,
-										connectorEnd2PortName);
+									| part1Type.getName().equals("AxisControlBus")) {
+								port2 = getProperty((Class) part2Type, connectorEnd2PortName);
 								// create SysML connector
-								Connector connector = magicDrawFactory
-										.createConnectorInstance();
-								ConnectorEnd connectorEnd1 = connector.getEnd()
-										.get(0);
-								ConnectorEnd connectorEnd2 = connector.getEnd()
-										.get(1);
+								Connector connector = magicDrawFactory.createConnectorInstance();
+								ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
+								ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
 								connectorEnd1.setPartWithPort(part1);
 								connectorEnd2.setPartWithPort(part2);
 								connectorEnd2.setRole(port2);
-								StereotypesHelper.addStereotype(connectorEnd2,
-										nestedConnectorEndStereotype);
-								StereotypesHelper.setStereotypePropertyValue(
-										connectorEnd2,
-										nestedConnectorEndStereotype,
-										"propertyPath", part2);
+								StereotypesHelper.addStereotype(connectorEnd2, nestedConnectorEndStereotype);
+								StereotypesHelper.setStereotypePropertyValue(connectorEnd2,
+										nestedConnectorEndStereotype, "propertyPath", part2);
 								connector.setName(connection);
 								if (class_ instanceof Class) {
 									Class class2 = (Class) class_;
 									class2.getOwnedConnector().add(connector);
-									StereotypesHelper.addStereotype(connector,
-											modelicaConnectionStereotype);
+									StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 								}
-								if (unresolvedConnections
-										.contains(modelicaConnectionData)) {
+								if (unresolvedConnections.contains(modelicaConnectionData)) {
 									if (class_ instanceof Class) {
-										resolvedConnections
-												.add(modelicaConnectionData);
+										resolvedConnections.add(modelicaConnectionData);
 									}
 								}
 							} else if (part2Type.getName().equals("ControlBus")
-									| part2Type.getName().equals(
-											"AxisControlBus")) {
-								port1 = getProperty((Class) part1Type,
-										connectorEnd1PortName);
+									| part2Type.getName().equals("AxisControlBus")) {
+								port1 = getProperty((Class) part1Type, connectorEnd1PortName);
 								// create SysML connector
-								Connector connector = magicDrawFactory
-										.createConnectorInstance();
-								ConnectorEnd connectorEnd1 = connector.getEnd()
-										.get(0);
-								ConnectorEnd connectorEnd2 = connector.getEnd()
-										.get(1);
+								Connector connector = magicDrawFactory.createConnectorInstance();
+								ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
+								ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
 								connectorEnd1.setPartWithPort(part1);
 								connectorEnd1.setRole(port1);
-								StereotypesHelper.addStereotype(connectorEnd1,
-										nestedConnectorEndStereotype);
-								StereotypesHelper.setStereotypePropertyValue(
-										connectorEnd1,
-										nestedConnectorEndStereotype,
-										"propertyPath", part1);
+								StereotypesHelper.addStereotype(connectorEnd1, nestedConnectorEndStereotype);
+								StereotypesHelper.setStereotypePropertyValue(connectorEnd1,
+										nestedConnectorEndStereotype, "propertyPath", part1);
 								connectorEnd2.setPartWithPort(part2);
 								connector.setName(connection);
 								if (class_ instanceof Class) {
 									Class class2 = (Class) class_;
 									class2.getOwnedConnector().add(connector);
-									StereotypesHelper.addStereotype(connector,
-											modelicaConnectionStereotype);
+									StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 								}
-								if (unresolvedConnections
-										.contains(modelicaConnectionData)) {
+								if (unresolvedConnections.contains(modelicaConnectionData)) {
 									if (class_ instanceof Class) {
-										resolvedConnections
-												.add(modelicaConnectionData);
+										resolvedConnections.add(modelicaConnectionData);
 									}
 								}
 							} else {
 								// resolve connections at second traversal
 								if (class_ instanceof Class) {
-									unresolvedConnections
-											.add(modelicaConnectionData);
+									unresolvedConnections.add(modelicaConnectionData);
 								}
 							}
 
@@ -1516,28 +1374,21 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 					if (part1 != null) {
 						Type part1Type = part1.getType();
 
-						port1 = getProperty((Class) part1Type,
-								connectorEnd1PortName);
+						port1 = getProperty((Class) part1Type, connectorEnd1PortName);
 						port2 = getProperty(class_, connectorEnd2PortName);
 
 						if ((port1 != null) & (port2 != null)) {
 
 							// create SysML connector
-							Connector connector = magicDrawFactory
-									.createConnectorInstance();
+							Connector connector = magicDrawFactory.createConnectorInstance();
 
-							ConnectorEnd connectorEnd1 = connector.getEnd()
-									.get(0);
-							ConnectorEnd connectorEnd2 = connector.getEnd()
-									.get(1);
+							ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
+							ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
 
 							connectorEnd1.setPartWithPort(part1);
 							connectorEnd1.setRole(port1);
-							StereotypesHelper.addStereotype(connectorEnd1,
-									nestedConnectorEndStereotype);
-							StereotypesHelper.setStereotypePropertyValue(
-									connectorEnd1,
-									nestedConnectorEndStereotype,
+							StereotypesHelper.addStereotype(connectorEnd1, nestedConnectorEndStereotype);
+							StereotypesHelper.setStereotypePropertyValue(connectorEnd1, nestedConnectorEndStereotype,
 									"propertyPath", part1);
 							connectorEnd2.setRole(port2);
 
@@ -1547,21 +1398,17 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 							if (class_ instanceof Class) {
 								Class class2 = (Class) class_;
 								class2.getOwnedConnector().add(connector);
-								StereotypesHelper.addStereotype(connector,
-										modelicaConnectionStereotype);
+								StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 							}
-							if (unresolvedConnections
-									.contains(modelicaConnectionData)) {
+							if (unresolvedConnections.contains(modelicaConnectionData)) {
 								if (class_ instanceof Class) {
-									resolvedConnections
-											.add(modelicaConnectionData);
+									resolvedConnections.add(modelicaConnectionData);
 								}
 							}
 						} else {
 							// resolve connections at second traversal
 							if (class_ instanceof Class) {
-								unresolvedConnections
-										.add(modelicaConnectionData);
+								unresolvedConnections.add(modelicaConnectionData);
 							}
 						}
 					}
@@ -1570,30 +1417,23 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 						Type part2Type = part2.getType();
 						// Type part2Type = part2.getType();
 
-						port2 = getProperty((Class) part2Type,
-								connectorEnd2PortName);
+						port2 = getProperty((Class) part2Type, connectorEnd2PortName);
 						port1 = getProperty(class_, connectorEnd1PortName);
 
 						if ((port1 != null) & (port2 != null)) {
 
 							// create SysML connector
-							Connector connector = magicDrawFactory
-									.createConnectorInstance();
+							Connector connector = magicDrawFactory.createConnectorInstance();
 
-							ConnectorEnd connectorEnd1 = connector.getEnd()
-									.get(0);
-							ConnectorEnd connectorEnd2 = connector.getEnd()
-									.get(1);
+							ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
+							ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
 
 							// connectorEnd1.setPartWithPort(part1);
 							connectorEnd1.setRole(port1);
 							connectorEnd2.setPartWithPort(part2);
 							connectorEnd2.setRole(port2);
-							StereotypesHelper.addStereotype(connectorEnd2,
-									nestedConnectorEndStereotype);
-							StereotypesHelper.setStereotypePropertyValue(
-									connectorEnd2,
-									nestedConnectorEndStereotype,
+							StereotypesHelper.addStereotype(connectorEnd2, nestedConnectorEndStereotype);
+							StereotypesHelper.setStereotypePropertyValue(connectorEnd2, nestedConnectorEndStereotype,
 									"propertyPath", part2);
 							connector.setName(connection);
 							// connector.
@@ -1602,22 +1442,18 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 								Class class2 = (Class) class_;
 								class2.getOwnedConnector().add(connector);
 
-								StereotypesHelper.addStereotype(connector,
-										modelicaConnectionStereotype);
+								StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 							}
 
-							if (unresolvedConnections
-									.contains(modelicaConnectionData)) {
+							if (unresolvedConnections.contains(modelicaConnectionData)) {
 								if (class_ instanceof Class) {
-									resolvedConnections
-											.add(modelicaConnectionData);
+									resolvedConnections.add(modelicaConnectionData);
 								}
 							}
 						} else {
 							// resolve connections at second traversal
 							if (class_ instanceof Class) {
-								unresolvedConnections
-										.add(modelicaConnectionData);
+								unresolvedConnections.add(modelicaConnectionData);
 							}
 
 						}
@@ -1630,8 +1466,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 					if ((port1 != null) & (port2 != null)) {
 
 						// create SysML connector
-						Connector connector = magicDrawFactory
-								.createConnectorInstance();
+						Connector connector = magicDrawFactory.createConnectorInstance();
 
 						ConnectorEnd connectorEnd1 = connector.getEnd().get(0);
 						ConnectorEnd connectorEnd2 = connector.getEnd().get(1);
@@ -1646,8 +1481,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 							Class class2 = (Class) class_;
 							class2.getOwnedConnector().add(connector);
 
-							StereotypesHelper.addStereotype(connector,
-									modelicaConnectionStereotype);
+							StereotypesHelper.addStereotype(connector, modelicaConnectionStereotype);
 						}
 
 						if (unresolvedConnections.contains(specificConnection)) {
@@ -1683,22 +1517,17 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		// need to find the correct segment comparison
 		for (PackageableElement packageableElement : traverseableTypes) {
 			if (packageableElement instanceof Type) {
-				if (packageableElement.getQualifiedName().contains(
-						qualifiedTypeName)) {
-					String[] traverseableTypeQNSegments = packageableElement
-							.getQualifiedName().split("::");
-					String[] qualifiedTypeQNSegments = qualifiedTypeName
-							.split("::");
+				if (packageableElement.getQualifiedName().contains(qualifiedTypeName)) {
+					String[] traverseableTypeQNSegments = packageableElement.getQualifiedName().split("::");
+					String[] qualifiedTypeQNSegments = qualifiedTypeName.split("::");
 					// go from right to left to check for identity until size of
 					// qualifiedTypeQNSegments is full
 					boolean isMatch = false;
 					for (int i = 0; i < qualifiedTypeQNSegments.length; i++) {
-						String qualifiedTypeQNSegment = qualifiedTypeQNSegments[qualifiedTypeQNSegments.length
-								- i - 1];
+						String qualifiedTypeQNSegment = qualifiedTypeQNSegments[qualifiedTypeQNSegments.length - i - 1];
 						String traverseableTypeQNSegment = traverseableTypeQNSegments[traverseableTypeQNSegments.length
 								- i - 1];
-						if (qualifiedTypeQNSegment
-								.equals(traverseableTypeQNSegment)) {
+						if (qualifiedTypeQNSegment.equals(traverseableTypeQNSegment)) {
 							isMatch = true;
 						} else {
 							isMatch = false;
@@ -1715,19 +1544,14 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		// check if a new namespace is used
 		for (String newNamespace : importMappings.keySet()) {
 			if (qualifiedTypeName.contains(newNamespace + "::")) {
-				String importedNamespace = importMappings.get(newNamespace)
-						.replaceAll("\\.", "::");
-				qualifiedTypeName = qualifiedTypeName.replaceFirst(newNamespace
-						+ "::", importedNamespace + "::");
+				String importedNamespace = importMappings.get(newNamespace).replaceAll("\\.", "::");
+				qualifiedTypeName = qualifiedTypeName.replaceFirst(newNamespace + "::", importedNamespace + "::");
 
 				for (PackageableElement packageableElement : traverseableTypes) {
 					if (packageableElement instanceof Type) {
-						if (packageableElement.getQualifiedName().contains(
-								qualifiedTypeName)) {
-							String[] traverseableTypeQNSegments = packageableElement
-									.getQualifiedName().split("::");
-							String[] qualifiedTypeQNSegments = qualifiedTypeName
-									.split("::");
+						if (packageableElement.getQualifiedName().contains(qualifiedTypeName)) {
+							String[] traverseableTypeQNSegments = packageableElement.getQualifiedName().split("::");
+							String[] qualifiedTypeQNSegments = qualifiedTypeName.split("::");
 							// go from right to left to check for identity until
 							// size of qualifiedTypeQNSegments is full
 							boolean isMatch = false;
@@ -1736,8 +1560,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 										- i - 1];
 								String traverseableTypeQNSegment = traverseableTypeQNSegments[traverseableTypeQNSegments.length
 										- i - 1];
-								if (qualifiedTypeQNSegment
-										.equals(traverseableTypeQNSegment)) {
+								if (qualifiedTypeQNSegment.equals(traverseableTypeQNSegment)) {
 									isMatch = true;
 								} else {
 									isMatch = false;
@@ -1756,8 +1579,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	}
 
 	private Type getTypeFromProfile(Project project, String typeName) {
-		for (PackageableElement sysmopackageableElement : sysML4ModelicaProfile
-				.getPackagedElement()) {
+		for (PackageableElement sysmopackageableElement : sysML4ModelicaProfile.getPackagedElement()) {
 			if (sysmopackageableElement.getName().equals("Types")) {
 				Package realtypesPack = (Package) sysmopackageableElement;
 				for (Type type2 : realtypesPack.getOwnedType()) {
@@ -1784,13 +1606,11 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	}
 
 	private Enumeration getEnumeration(Project project, String typeName) {
-		for (PackageableElement packageableElement : project.getModel()
-				.getPackagedElement()) {
+		for (PackageableElement packageableElement : project.getModel().getPackagedElement()) {
 			if (packageableElement instanceof Package) {
 				if (packageableElement.getName().equals("SysML4Modelica")) {
 					Package sysml4mopack = (Package) packageableElement;
-					for (PackageableElement sysmopackageableElement : sysml4mopack
-							.getPackagedElement()) {
+					for (PackageableElement sysmopackageableElement : sysml4mopack.getPackagedElement()) {
 						if (sysmopackageableElement.getName().equals("Types")) {
 							Package realtypesPack = (Package) sysmopackageableElement;
 							for (Type type2 : realtypesPack.getOwnedType()) {
@@ -1810,8 +1630,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	}
 
 	public static Profile getSysML4ModelicaProfile(Project project) {
-		for (PackageableElement packageableElement : project.getModel()
-				.getPackagedElement()) {
+		for (PackageableElement packageableElement : project.getModel().getPackagedElement()) {
 			if (packageableElement instanceof Profile) {
 				if (packageableElement.getName().equals("SysML4Modelica")) {
 					return (Profile) packageableElement;
@@ -1822,10 +1641,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	}
 
 	public static void setUnresolvedComponents() {
-		for (ModelicaComponentData modelicaComponentData : unresolvedComponents
-				.keySet()) {
-			Classifier classifier = unresolvedComponents
-					.get(modelicaComponentData);
+		for (ModelicaComponentData modelicaComponentData : unresolvedComponents.keySet()) {
+			Classifier classifier = unresolvedComponents.get(modelicaComponentData);
 			importClassComponent(modelicaComponentData, classifier);
 		}
 	}
@@ -1836,8 +1653,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		}
 	}
 
-	private static void importClassComponent(
-			ModelicaComponentData modelicaComponentData, Classifier classifier) {
+	private static void importClassComponent(ModelicaComponentData modelicaComponentData, Classifier classifier) {
 		String propertyName = modelicaComponentData.getName();
 		String propertyTypeQFName = modelicaComponentData.getTypeQName();
 		String propertyTypeQFName2 = propertyTypeQFName.replaceAll("\\.", "::");
@@ -1846,8 +1662,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		Type propertyType = null;
 		propertyType = getType(propertyTypeQFName2);
 
-		Stereotype classStereotype = (Stereotype) classifier
-				.getAppliedStereotypeInstance().getClassifier().get(0);
+		Stereotype classStereotype = (Stereotype) classifier.getAppliedStereotypeInstance().getClassifier().get(0);
 
 		if (!isLastTraversal) {
 			// all components will be resolved at last
@@ -1858,60 +1673,47 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 		// create UML property or port or function parameter
 		if (propertyType != null) {
-			Stereotype appliedStereotype = (Stereotype) propertyType
-					.getAppliedStereotypeInstance().getClassifier().get(0);
+			Stereotype appliedStereotype = (Stereotype) propertyType.getAppliedStereotypeInstance().getClassifier()
+					.get(0);
 			if (classStereotype != modelicaFunctionStereotype) {
-				if (appliedStereotype == modelicaRecordStereotype
-						| appliedStereotype == modelicaTypeStereotype) {
-					Property property = magicDrawFactory
-							.createPropertyInstance();
+				if (appliedStereotype == modelicaRecordStereotype | appliedStereotype == modelicaTypeStereotype) {
+					Property property = magicDrawFactory.createPropertyInstance();
 					property.setName(propertyName);
 					property.setType(propertyType);
-					StereotypesHelper.addStereotype(property,
-							modelicaValuePropertyStereotype);
+					StereotypesHelper.addStereotype(property, modelicaValuePropertyStereotype);
 					classifier.getAttribute().add(property);
 
-					importClassComponentAttributes(modelicaComponentData,
-							property, classifier);
+					importClassComponentAttributes(modelicaComponentData, property, classifier);
 
-				} else if (appliedStereotype == modelicaClassStereotype
-						| appliedStereotype == modelicaModelStereotype
+				} else if (appliedStereotype == modelicaClassStereotype | appliedStereotype == modelicaModelStereotype
 						| appliedStereotype == modelicaBlockStereotype) {
-					Property property = magicDrawFactory
-							.createPropertyInstance();
+					Property property = magicDrawFactory.createPropertyInstance();
 					property.setName(propertyName);
 					property.setType(propertyType);
-					StereotypesHelper.addStereotype(property,
-							modelicaPartStereotype);
+					StereotypesHelper.addStereotype(property, modelicaPartStereotype);
 					classifier.getAttribute().add(property);
 
-					importClassComponentAttributes(modelicaComponentData,
-							property, classifier);
+					importClassComponentAttributes(modelicaComponentData, property, classifier);
 
 				} else if (appliedStereotype == modelicaConnectorStereotype) {
 					Port port = magicDrawFactory.createPortInstance();
 					port.setName(propertyName);
 					port.setType(propertyType);
-					StereotypesHelper.addStereotype(port,
-							modelicaPortStereotype);
+					StereotypesHelper.addStereotype(port, modelicaPortStereotype);
 					classifier.getAttribute().add(port);
 
-					importClassComponentAttributes(modelicaComponentData, port,
-							classifier);
+					importClassComponentAttributes(modelicaComponentData, port, classifier);
 
 				}
 			} else if (classStereotype == modelicaFunctionStereotype) {
-				Parameter parameter = magicDrawFactory
-						.createParameterInstance();
+				Parameter parameter = magicDrawFactory.createParameterInstance();
 				parameter.setName(modelicaComponentData.getName());
 				parameter.setType(propertyType);
-				StereotypesHelper.addStereotype(parameter,
-						modelicaFunctionParameterStereotype);
+				StereotypesHelper.addStereotype(parameter, modelicaFunctionParameterStereotype);
 				FunctionBehavior functionBehavior = (FunctionBehavior) classifier;
 				functionBehavior.getOwnedParameter().add(parameter);
 
-				importClassComponentAttributes(modelicaComponentData,
-						parameter, classifier);
+				importClassComponentAttributes(modelicaComponentData, parameter, classifier);
 			}
 
 			if (unresolvedComponents.containsKey(modelicaComponentData)) {
@@ -1928,43 +1730,37 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	private static void importFinalPrefix(boolean isFinal, TypedElement property) {
 		if (isFinal) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "isFinal", isFinal);
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "isFinal", isFinal);
 		}
 	}
 
 	private static void importScope(String innerOuter_UT, TypedElement property) {
 		if (innerOuter_UT.contains("inner")) {
-			StereotypesHelper
-					.setStereotypePropertyValue(property, (Stereotype) property
-							.getAppliedStereotypeInstance().getClassifier()
-							.get(0), "scope", modelicaInnerKind);
+			StereotypesHelper.setStereotypePropertyValue(property,
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "scope",
+					modelicaInnerKind);
 		} else if (innerOuter_UT.contains("outer")) {
-			StereotypesHelper
-					.setStereotypePropertyValue(property, (Stereotype) property
-							.getAppliedStereotypeInstance().getClassifier()
-							.get(0), "scope", modelicaOuterKind);
+			StereotypesHelper.setStereotypePropertyValue(property,
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "scope",
+					modelicaOuterKind);
 		}
 	}
 
-	private static void importArraySize(List<String> arraySize,
-			TypedElement property) {
+	private static void importArraySize(List<String> arraySize, TypedElement property) {
 		if (arraySize != null) {
 			for (String string : arraySize) {
 				// check if string matches an Integer, otherwise warning
 				try {
-					if (!string.contains("none")
-							& !string.contains("parameter")) {
+					if (!string.contains("none") & !string.contains("parameter")) {
 						// if (Integer.valueOf(string) != null) {
 						StereotypesHelper.setStereotypePropertyValue(property,
-								(Stereotype) property
-										.getAppliedStereotypeInstance()
-										.getClassifier().get(0), "arraySize",
-								string, true);
+								(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0),
+								"arraySize", string, true);
 					}
 					// else {
 					// System.err
-					// .println("WARNING: Component ArraySize Dimension not an Integer!");
+					// .println("WARNING: Component ArraySize Dimension not an
+					// Integer!");
 					// }
 				} catch (Exception e) {
 
@@ -1974,59 +1770,49 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		}
 	}
 
-	private static void importFlow(ModelicaComponentData modelicaComponentData,
-			TypedElement property) {
+	private static void importFlow(ModelicaComponentData modelicaComponentData, TypedElement property) {
 		if (modelicaComponentData.isFlow()) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "flowFlag",
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "flowFlag",
 					modelicaFlowKind);
 		}
 		if (modelicaComponentData.isStream()) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "flowFlag",
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "flowFlag",
 					modelicaStreamKind);
 		}
 	}
 
-	private static void importDeclarationEquation(TypedElement property,
-			Classifier classifier) {
+	private static void importDeclarationEquation(TypedElement property, Classifier classifier) {
 		String propertyName = property.getName();
 		// get component declaration equation
-		String declarationEquation = omc.getDeclarationEquation(classifier
-				.getQualifiedName().replaceAll("::", "."), propertyName);
+		String declarationEquation = omc.getDeclarationEquation(classifier.getQualifiedName().replaceAll("::", "."),
+				propertyName);
 		declarationEquation = declarationEquation.replaceAll("\n", "");
-		if (declarationEquation != null) {
+		if (declarationEquation != null & !declarationEquation.equals("\"\"")) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "declarationEquation",
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "declarationEquation",
 					declarationEquation);
 		}
 
 	}
 
-	private static void importConditionalExpression(
-			String classifierQualifiedName, int componentIndex,
+	private static void importConditionalExpression(String classifierQualifiedName, int componentIndex,
 			TypedElement property) {
 		if (componentIndex > 1) {
-			String conditionalExpression = omc.getNthComponentCondition(
-					classifierQualifiedName, componentIndex);
+			String conditionalExpression = omc.getNthComponentCondition(classifierQualifiedName, componentIndex);
 			conditionalExpression = conditionalExpression.replace("\"", "");
 			if (conditionalExpression != null) {
 				if (!conditionalExpression.equals("\n")) {
 					StereotypesHelper.setStereotypePropertyValue(property,
-							(Stereotype) property
-									.getAppliedStereotypeInstance()
-									.getClassifier().get(0),
+							(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0),
 							"conditionalExpression", conditionalExpression);
 				}
 			}
 		}
 	}
 
-	private static void importVisibility(String visibility,
-			TypedElement property) {
+	private static void importVisibility(String visibility, TypedElement property) {
 		visibility = visibility.replaceAll("\"", "");
 		if (visibility != null) {
 			if (visibility.contains("public")) {
@@ -2037,60 +1823,51 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		}
 	}
 
-	private static void importVariability(String variability,
-			TypedElement property) {
+	private static void importVariability(String variability, TypedElement property) {
 		if (variability.contains("const")) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "variability",
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "variability",
 					modelicaConstantKind);
 		} else if (variability.contains("discrete")) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "variability",
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "variability",
 					modelicaDiscreteKind);
 		} else if (variability.contains("param")) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "variability",
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "variability",
 					modelicaParameterKind);
 		} else if (variability.contains("var")) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "variability",
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "variability",
 					modelicaContinuousKind);
 		}
 	}
 
-	private static void importModifications(TypedElement property,
-			Classifier classifier) {
+	private static void importModifications(TypedElement property, Classifier classifier) {
 		String propertyName = property.getName();
-		String componentModificationsName = omc.getComponentModifierNames(
-				classifier.getQualifiedName().replaceAll("::", "."),
-				propertyName);
+		String componentModificationsName = omc
+				.getComponentModifierNames(classifier.getQualifiedName().replaceAll("::", "."), propertyName);
 		if (componentModificationsName.contains("{")) {
-			componentModificationsName = componentModificationsName.replace(
-					"{", "");
-			componentModificationsName = componentModificationsName.replace(
-					"}", "");
-			componentModificationsName = componentModificationsName.replace(
-					"\n", "");
-			componentModificationsName = componentModificationsName.replaceAll(
-					" ", "");
-			String[] componentModificationsArray = componentModificationsName
-					.split(",");
+			componentModificationsName = componentModificationsName.replace("{", "");
+			componentModificationsName = componentModificationsName.replace("}", "");
+			componentModificationsName = componentModificationsName.replace("\n", "");
+			componentModificationsName = componentModificationsName.replaceAll(" ", "");
+			String[] componentModificationsArray = componentModificationsName.split(",");
 
 			if (!componentModificationsArray[0].isEmpty()) {
 				for (String modificationName : componentModificationsArray) {
-					String modificationValue = omc
-							.getComponentModifierValue(classifier
-									.getQualifiedName().replaceAll("::", "."),
-									propertyName + "." + modificationName);
+					// remove quotes
+					if (modificationName.startsWith("\"")) {
+						modificationName = modificationName.substring(1, modificationName.length());
+					}
+					if (modificationName.endsWith("\"")) {
+						modificationName = modificationName.substring(0, modificationName.length() - 1);
+					}
+					String modificationValue = omc.getComponentModifierValue(
+							classifier.getQualifiedName().replaceAll("::", "."), propertyName + "." + modificationName);
 					modificationValue = modificationValue.replace("\\n", "");
 					StereotypesHelper.setStereotypePropertyValue(property,
-							(Stereotype) property
-									.getAppliedStereotypeInstance()
-									.getClassifier().get(0), "modification",
+							(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "modification",
 							modificationName + modificationValue, true);
 				}
 			}
@@ -2135,37 +1912,30 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		causality = causality.replaceAll("\"", "");
 		if (causality.equals("input")) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "causality",
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "causality",
 					modelicaInputKind);
 		} else if (causality.equals("output")) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "causality",
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "causality",
 					modelicaOutputKind);
 		}
 	}
 
-	private static void importReplaceablePrefix(boolean isreplaceable,
-			TypedElement property) {
+	private static void importReplaceablePrefix(boolean isreplaceable, TypedElement property) {
 		if (isreplaceable) {
 			StereotypesHelper.setStereotypePropertyValue(property,
-					(Stereotype) property.getAppliedStereotypeInstance()
-							.getClassifier().get(0), "isReplaceable", true);
+					(Stereotype) property.getAppliedStereotypeInstance().getClassifier().get(0), "isReplaceable", true);
 		}
 	}
 
-	private static void importClassComponentAttributes(
-			ModelicaComponentData modelicaComponentData, TypedElement property,
-			Classifier classifier) {
+	private static void importClassComponentAttributes(ModelicaComponentData modelicaComponentData,
+			TypedElement property, Classifier classifier) {
 		String propertyName = property.getName();
 
 		// get component index
 		int componentIndex = -1;
-		String classQualifiedName2 = classifier.getQualifiedName().replaceAll(
-				"::", ".");
-		ArrayList<ModelicaComponentData> componentDataList = omc
-				.getComponentData(classQualifiedName2);
+		String classQualifiedName2 = classifier.getQualifiedName().replaceAll("::", ".");
+		ArrayList<ModelicaComponentData> componentDataList = omc.getComponentData(classQualifiedName2);
 		int i = 1;
 		for (ModelicaComponentData modelicaComponentData2 : componentDataList) {
 			if (modelicaComponentData2.getName().equals(propertyName)) {
@@ -2191,9 +1961,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		importScope(modelicaComponentData.getInnerouter(), property);
 
 		// conditionalExpression
-		importConditionalExpression(
-				classifier.getQualifiedName().replaceAll("::", "."),
-				componentIndex, property);
+		importConditionalExpression(classifier.getQualifiedName().replaceAll("::", "."), componentIndex, property);
 
 		// isFinal
 		importFinalPrefix(modelicaComponentData.isFinal(), property);
