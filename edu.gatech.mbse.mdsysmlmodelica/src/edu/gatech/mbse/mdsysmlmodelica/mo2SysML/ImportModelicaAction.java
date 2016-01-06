@@ -902,7 +902,10 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			OpaqueExpression opaqueExpression = magicDrawFactory.createOpaqueExpressionInstance();
 			// equation = equation.replaceFirst(";", "");
 			if (equation.contains("\n")) {
-				equation = equation.substring(0, equation.lastIndexOf("\n"));
+				// make sure that line break is last character
+				if(equation.lastIndexOf("\n") == equation.length() | equation.lastIndexOf("\n") == equation.length() -1) {
+					equation = equation.substring(0, equation.lastIndexOf("\n"));
+				}
 			}
 			// else{
 			// equation = equation.substring(0, equation.lastIndexOf("\n"));
