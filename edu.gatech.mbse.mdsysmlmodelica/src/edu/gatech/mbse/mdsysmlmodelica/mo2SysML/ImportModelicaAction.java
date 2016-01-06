@@ -731,6 +731,9 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 					// newClassInformation = newClassInformation.replaceAll("{",
 					// "");
 					newClassInformation = newClassInformation.replaceAll("}", "");
+					if(newClassInformation.indexOf(")") == newClassInformation.length() -1){
+						newClassInformation = newClassInformation.substring(0, newClassInformation.length() -1);
+					}
 
 					String[] arraySizes = newClassInformation.split(",");
 
