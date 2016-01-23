@@ -938,13 +938,40 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			classDefinitionAttributes = classDefinitionAttributes.replace("]", "");
 			String[] classDefinitionAttributesArray = classDefinitionAttributes.split(",");
 
-			String isFinalString = classDefinitionAttributesArray[3];
+			// comment may contain commas. the array may need to be rearranged
+			boolean addStringsToOldSegment = false;
+			ArrayList<String> newArrangedList = new ArrayList<String>();
+			String temp = "";
+			for (String string : classDefinitionAttributesArray) {
+				String newString = string;
+				// first make sure how to process the segment
+				if (addStringsToOldSegment) {
+					if (string.endsWith("\"")) {
+						addStringsToOldSegment = false;
+						newString = temp + string;
+					}
+					temp = temp + string;
+				}
+				else{
+					if (string.startsWith(" \"") & !string.endsWith("\"")) {
+						addStringsToOldSegment = true;
+						temp = string;
+					}
+				}			
+				// process the segment
+				if (!addStringsToOldSegment) {
+					newArrangedList.add(newString);
+				} 
+			}
+			String[] newArrangedArray =  newArrangedList.toArray(new String[newArrangedList.size()]);
+			
+			String isFinalString = newArrangedArray[3];
 			isFinalString = isFinalString.replace(" ", "");
 			isFinal = Boolean.valueOf(isFinalString);
-			String isPartialString = classDefinitionAttributesArray[2];
+			String isPartialString = newArrangedArray[2];
 			isPartialString = isPartialString.replace(" ", "");
 			isPartial = Boolean.valueOf(isPartialString);
-			String isEncapsulatedString = classDefinitionAttributesArray[4];
+			String isEncapsulatedString = newArrangedArray[4];
 			isEncapsulatedString = isEncapsulatedString.replace(" ", "");
 			isEncapsulated = Boolean.valueOf(isEncapsulatedString);
 		}
