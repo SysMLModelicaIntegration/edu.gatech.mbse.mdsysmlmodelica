@@ -342,7 +342,7 @@ public class SysML2Modelica {
 				buffer);
 
 		// print model and name
-		printName(class_, buffer, hasLineStartingTabs, "class");
+		printName(class_, buffer, hasLineStartingTabs, "type");
 
 		// print import statements
 		printModelicaImports(class_, buffer);
@@ -1391,6 +1391,7 @@ public class SysML2Modelica {
 						if (modString instanceof String) {
 							if (!modString.equals(" ")) {
 								modString = modString.replaceAll("\n", "");
+								modString = modString.replaceAll("\"", "");
 								buffer.append(modString);
 							}
 							if (iterator.hasNext()) {
