@@ -92,6 +92,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 import com.nomagic.uml2.impl.ElementsFactory;
 
+import edu.gatech.mbse.mdsysmlmodelica.helper.ReadAndParseFile;
+import edu.gatech.mbse.mdsysmlmodelica.helper.ReplaceableComponent;
 import edu.gatech.mbse.mdsysmlmodelica.helper.StringHandler;
 import edu.gatech.mbse.mdsysmlmodelica.omc.OpenModelicaCompilerCommunication;
 
@@ -191,6 +193,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	private static Set<Classifier> resolvedGeneralizations = new HashSet<Classifier>();
 
 	private static Map<String, String> importMappings = new HashMap<String, String>();
+	
+	public static List<ReplaceableComponent> replaceableComponents = null;
 
 	static Properties prop = System.getProperties();
 
@@ -236,6 +240,9 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			}
 			String error = omc.getErrorString();
 
+			// parse Modelica file for replaceable components (not supported by OMC scripting API)
+			replaceableComponents = ReadAndParseFile.getReplaceableComponents(modelicaFile);
+			
 			// load ModelicaServices
 			// String modelicaServicesFileOKString =
 			// omc.loadModel("ModelicaServices");
@@ -2003,6 +2010,14 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		importModifications(property, classifier);
 
 		// isReplaceable
+		for (ReplaceableComponent replaceableComponent : replaceableComponents) {
+			String componentName = replaceableComponent.getComponentName();
+			String componentOwnerQualifiedName = replaceableComponent.getComponentOwnerQualifiedName();
+			if(componentName.equals(propertyName) & componentOwnerQualifiedName.equals(classQualifiedName2)){
+				modelicaComponentData.setReplaceable(true);
+			}
+		}
+		
 		importReplaceablePrefix(modelicaComponentData.isReplaceable(), property);
 
 		// declarationEquation
