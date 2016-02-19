@@ -24,7 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package edu.gatech.mbse.mdsysmlmodelica.mo2SysML;
+package mo2SysML;
 
 import java.awt.event.ActionEvent;
 
