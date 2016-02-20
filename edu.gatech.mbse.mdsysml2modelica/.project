@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>edu.gatech.mbse.mdsysml2modelica</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>MAGIC_DRAW_INSTALL_DIRECTORY</name>
+			<type>2</type>
+			<location>C:/Program Files/MagicDraw18-2</location>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>GITREPO_LOC</name>
+			<value>file:/C:/Users/Axel/git/edu.gatech.mbse.mdsysmlmodelica</value>
+		</variable>
+	</variableList>
+</projectDescription>
