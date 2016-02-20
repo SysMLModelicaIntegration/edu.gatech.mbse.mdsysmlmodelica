@@ -26,6 +26,7 @@
 
 package sysml2mo;
 
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -52,8 +53,10 @@ import com.nomagic.magicdraw.uml.DiagramTypeConstants;
 import com.nomagic.magicdraw.uml.symbols.DiagramPresentationElement;
 import com.nomagic.magicdraw.uml.symbols.PresentationElement;
 import com.nomagic.magicdraw.uml.symbols.paths.PathElement;
+import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
 import com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdmodels.Model;
+import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Classifier;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Comment;
@@ -110,13 +113,14 @@ public class SysML2Modelica {
 	private static Stereotype modelicaClassDefinitionST;
 	private static Stereotype modelicaRecordST;
 	public static String tabs = new String();
+	private static Model rootModel = null;
 
 	public static boolean isWithMagicDrawLayout = false;
 	public static ArrayList<Property> partsInIBDs = new ArrayList<Property>();
 	public static ArrayList<ConnectorEnd> connectorEndsInIBDs = new ArrayList<ConnectorEnd>();
 
 	public static StringBuffer printMagicDrawModel() {		
-		Model rootModel = Application.getInstance().getProject().getModel();
+		rootModel = Application.getInstance().getProject().getModel();
 		Collection<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> ownedPackages = rootModel
 				.getNestedPackage();
 
@@ -1403,13 +1407,59 @@ public class SysML2Modelica {
 				}
 
 				// print modification
+				
+				// get also list of redeclare statements (modification of component type)
+				List<String> redeclareStatements = new ArrayList<String>();
+				String[] generalizedClassNames = qualifiedName.split("\\.");
+				String generalizedClassName = generalizedClassNames[generalizedClassNames.length - 1];
+				
+				Collection<Dependency> sysmlDependencies = new ArrayList<com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency>();
+				java.lang.Class[] classArray = new java.lang.Class[1];
+				classArray[0] = com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency.class;
+				Collection<? extends Element> elementsOfType = ModelHelper.getElementsOfType(rootModel, classArray, true, true);
+				sysmlDependencies = (Collection<com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency>) elementsOfType;
+				Collection<com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency> dependencies = new ArrayList<com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency>();
+//				for (Dependency sysmlInformationFlow : sysmlDependencies) {
+//					if (MDSysMLModelHandler.isSysMLElement(sysmlInformationFlow, "ItemFlow")) {
+//						dependencies.add(sysmlInformationFlow);
+//					}
+//				}
+				
+				
+				
+				
+				
+				for (Dependency dependency : sysmlDependencies) {
+					try{
+						NamedElement client = (NamedElement) dependency.getClient().toArray()[0];
+						String className = client.getName();
+						NamedElement target = (NamedElement) dependency.getTarget().toArray()[0];
+						String generalizedName = target.getName();
+						if(className.equals(class_.getName()) & generalizedName.equals(generalizedClassName)){
+							Collection<String> redeclareStatement = StereotypesHelper
+									.getStereotypePropertyValueAsString(
+											dependency,
+											StereotypesHelper
+													.getFirstVisibleStereotype(dependency),
+											"modification");
+							redeclareStatements.addAll(redeclareStatement);
+						}
+					}
+					catch(Exception e){
+						
+					}					
+				}
+				
+				// get component modifications
 				List<String> modificationObject = StereotypesHelper
 						.getStereotypePropertyValueAsString(
 								generalization,
 								StereotypesHelper
 										.getFirstVisibleStereotype(generalization),
 								"modification");
-				if (!modificationObject.isEmpty()) {
+				
+				
+				if (!modificationObject.isEmpty() | !redeclareStatements.isEmpty()) {
 					buffer.append(" (");
 
 					for (Iterator<String> iterator = modificationObject
@@ -1426,6 +1476,23 @@ public class SysML2Modelica {
 							}
 						}
 					}
+					
+					for (Iterator<String> iterator = redeclareStatements
+							.iterator(); iterator.hasNext();) {
+						String modString = (String) iterator.next();
+
+						if (modString instanceof String) {
+							if (!modString.equals(" ")) {
+								modString = modString.replaceAll("\n", "");
+								buffer.append("redeclare " + modString);
+							}
+							if (iterator.hasNext()) {
+								buffer.append(", ");
+							}
+						}
+					}
+					
+					
 					buffer.append(")");
 				}
 				buffer.append(";  \r\n");
