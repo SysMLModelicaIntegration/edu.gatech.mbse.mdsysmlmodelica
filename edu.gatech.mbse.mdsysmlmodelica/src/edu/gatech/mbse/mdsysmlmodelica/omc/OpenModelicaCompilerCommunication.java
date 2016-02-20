@@ -38,7 +38,7 @@ import org.openmodelica.modelicaml.modelica.importer.omc.corba.ConnectException;
 import org.openmodelica.modelicaml.modelica.importer.omc.corba.OMCProxy;
 
 import edu.gatech.mbse.mdsysmlmodelica.helper.StringHandler;
-import edu.gatech.mbse.mdsysmlmodelica.mo2SysML.ModelicaComponentData;
+import mo2SysML.ModelicaComponentData;
 
 
 public class OpenModelicaCompilerCommunication {

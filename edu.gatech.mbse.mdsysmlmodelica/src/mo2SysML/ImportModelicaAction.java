@@ -61,6 +61,7 @@ import com.nomagic.magicdraw.ui.browser.actions.DefaultBrowserAction;
 
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
 import com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdmodels.Model;
+import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Classifier;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Comment;
@@ -93,6 +94,7 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 import com.nomagic.uml2.impl.ElementsFactory;
 
 import edu.gatech.mbse.mdsysmlmodelica.helper.ReadAndParseFile;
+import edu.gatech.mbse.mdsysmlmodelica.helper.RedeclareStatement;
 import edu.gatech.mbse.mdsysmlmodelica.helper.ReplaceableComponent;
 import edu.gatech.mbse.mdsysmlmodelica.helper.StringHandler;
 import edu.gatech.mbse.mdsysmlmodelica.omc.OpenModelicaCompilerCommunication;
@@ -148,6 +150,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 	private static Stereotype modelicaConnectionStereotype;
 
 	private static Stereotype nestedConnectorEndStereotype;
+	
+	private static Stereotype modelicaConstrainedByStereotype;
 
 	private static Type modelicaRealType;
 	private static Type modelicaIntegerType;
@@ -194,7 +198,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 	private static Map<String, String> importMappings = new HashMap<String, String>();
 	
-	public static List<ReplaceableComponent> replaceableComponents = null;
+//	public static List<ReplaceableComponent> replaceableComponents = null;
+	public static List<RedeclareStatement> redeclareStatements = null;
 
 	static Properties prop = System.getProperties();
 
@@ -241,7 +246,9 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 			String error = omc.getErrorString();
 
 			// parse Modelica file for replaceable components (not supported by OMC scripting API)
-			replaceableComponents = ReadAndParseFile.getReplaceableComponents(modelicaFile);
+//			replaceableComponents = ReadAndParseFile.getReplaceableComponents(modelicaFile);
+			
+			redeclareStatements = ReadAndParseFile.getRedeclareStatements(modelicaFile);
 			
 			// load ModelicaServices
 			// String modelicaServicesFileOKString =
@@ -396,6 +403,8 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 		// load NestedConnectorEnd SysML stereotype
 		nestedConnectorEndStereotype = StereotypesHelper.getStereotype(project, "NestedConnectorEnd");
+		
+		modelicaConstrainedByStereotype = StereotypesHelper.getStereotype(project, "ModelicaConstrainedBy");
 
 		// load enumeration kinds
 		modelicaVariabilityKind = (Enumeration) getEnumeration(project, "ModelicaVariabilityKind");
@@ -681,7 +690,7 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 					}
 				
 				
-				// modifications
+				// modifications									
 				String extendsModificationName = omc.getExtendsModifierNames(ownerQualifiedName, inheritedClass);
 				if (extendsModificationName.contains("{")) {
 					extendsModificationName = extendsModificationName.replace("{", "");
@@ -703,7 +712,52 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 
 					}
 				}
-
+				
+				// redeclare Statement
+				// current OMC Scripting API does not support it (status in Feb 2016)
+				// https://openmodelica.org/forum/default-topic/1843-api-to-retrieve-getextendsmodifiernames#p6791
+				for (RedeclareStatement redeclareStatement : redeclareStatements) {
+					String classQualifiedName = redeclareStatement.getClassName();
+					String inheritedClassName = redeclareStatement.getInheritedClassName();
+					
+					String[] inheritedClassQualifiedName = inheritedClass.split("\\.");
+					String inheritedClassN = inheritedClassQualifiedName[0];
+					if(inheritedClassQualifiedName.length > 1){
+						inheritedClassN = inheritedClassQualifiedName[inheritedClassQualifiedName.length - 1];
+					}
+					
+					
+					if(ownerQualifiedName.equals(classQualifiedName) & inheritedClassN.equals(inheritedClassName)){
+						String newComponentTypeName = redeclareStatement.getNewComponentTypeName();
+						String componentName = redeclareStatement.getComponentName();
+						
+						// create or get dependency between class and inheritedClass
+						Dependency ownerdependency = null;
+						if(rootPackage.getSupplierDependency().size() == 0){
+							Dependency dependency = magicDrawFactory.createDependencyInstance();
+							dependency.getClient().add(owner);
+							dependency.getTarget().add(generalizedClass);
+							dependency.setOwner(rootPackage);														
+							ownerdependency = dependency; 
+						}
+						else{
+							// get dependency
+							for (Dependency dependency : rootPackage.getSupplierDependency()) {
+								NamedElement client = (NamedElement)dependency.getClient().toArray()[0];
+								NamedElement target = (NamedElement)dependency.getTarget().toArray()[0];
+								if((client == owner) & (target == generalizedClass)){
+									ownerdependency = dependency; 
+									break;
+								}
+							}
+							ownerdependency = (Dependency) rootPackage.getSupplierDependency().toArray()[0];
+						}						
+						StereotypesHelper.setStereotypePropertyValue(ownerdependency,
+								modelicaConstrainedByStereotype, "modification", newComponentTypeName + " " + componentName, true);
+					}
+				}
+				
+				
 				// causality
 				if (extendsStereotype == modelicaShortExtendsStereotype) {
 					String shortClassInformation = omc.getShortDefinitionBaseClassInformation(ownerQualifiedName);
@@ -2010,13 +2064,13 @@ public class ImportModelicaAction extends DefaultBrowserAction {
 		importModifications(property, classifier);
 
 		// isReplaceable
-		for (ReplaceableComponent replaceableComponent : replaceableComponents) {
-			String componentName = replaceableComponent.getComponentName();
-			String componentOwnerQualifiedName = replaceableComponent.getComponentOwnerQualifiedName();
-			if(componentName.equals(propertyName) & componentOwnerQualifiedName.equals(classQualifiedName2)){
-				modelicaComponentData.setReplaceable(true);
-			}
-		}
+//		for (ReplaceableComponent replaceableComponent : replaceableComponents) {
+//			String componentName = replaceableComponent.getComponentName();
+//			String componentOwnerQualifiedName = replaceableComponent.getComponentOwnerQualifiedName();
+//			if(componentName.equals(propertyName) & componentOwnerQualifiedName.equals(classQualifiedName2)){
+//				modelicaComponentData.setReplaceable(true);
+//			}
+//		}
 		
 		importReplaceablePrefix(modelicaComponentData.isReplaceable(), property);
 
