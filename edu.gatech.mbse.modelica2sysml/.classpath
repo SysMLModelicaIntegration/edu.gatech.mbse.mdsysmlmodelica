@@ -157,5 +157,6 @@
 	<classpathentry kind="lib" path="MAGIC_DRAW_INSTALL_DIRECTORY/lib/bundles/com.nomagic.magicdraw.uml2_2.5.0.201507301136.jar"/>
 	<classpathentry kind="lib" path="MAGIC_DRAW_INSTALL_DIRECTORY/lib/bundles/com.nomagic.magicdraw_17.0.5.201507301136.jar"/>
 	<classpathentry kind="lib" path="missing ecore jar/org.eclipse.ocl.ecore_3.1.0.v20110510-2118.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/edu.gatech.mbse.mdsysml2modelica"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
