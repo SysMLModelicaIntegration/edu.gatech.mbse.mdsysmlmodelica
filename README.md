@@ -77,7 +77,7 @@ Eclipse IDE for Java EE Developers package).
   *C:\Users\Axel\git\edu.gatech.mbse.mdsysmlmodelica-feb19-2016*, then edit the md.plugins.dir Java system property to refer to 
  *C:\\Users\\Axel\\git\\edu.gatech.mbse.mdsysmlmodelica-feb19-2016*. Make sure to carefully replace the default path location with your location while considering these rules:
 	1. Make sure to include a double backslash for every slash in the path location (Example: "gitrepos\myrepo" -> "gitrepos\\\\myrepo")
-	2. Make sure to include a semicolon (;) to separate your path entry from others and to include the following character sequence to end the path entry: 
+	2. Make sure to include a semicolon (;) to separate your path entry from others and to include the following character sequence at the end of the md.plugins.dir Java system property value: 
   ```text
 &quot;"/>
 ```
