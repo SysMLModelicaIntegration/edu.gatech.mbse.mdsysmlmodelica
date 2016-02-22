@@ -6,7 +6,7 @@ Java-based implementation of the OMG SysML-Modelica Transformation (SyM) using M
 
 ##Instructions to install and execute the roundtrip SysML-Modelica transformation
 
-By Axel Reichwein, February 2, 2016
+By Axel Reichwein, February 22, 2016
 
 Overview: There are two usage modes to run the bidirectional SysML-Modelica transformations: **user mode** and **debugger mode**. 
 - user mode allows to open MagicDraw and run the bidirectional SysML-Modelica transformations. 
@@ -70,16 +70,16 @@ Eclipse IDE for Java EE Developers package).
 
 1. It is necessary to specify the location of the MagicDraw jars. In Eclipse, open the Project Explorer view. (Window → Show View → Project Explorer). For both the edu.gatech.mbse.modelica2sysml and the edu.gatech.mbse.mdsysml2modelica projects, do the following:
 2. Expand the project
-2. Right-click on the resource named MAGIC_DRAW_INSTALL_DIRECTORY
+2. Right-click on the resource named *MAGIC_DRAW_INSTALL_DIRECTORY*
 3. Edit the location of the linked resources to point to your MagicDraw installation directory (for example C:\Program Files\MagicDraw18-2)
 
 ### 5.	Configuring the launch configuration 
 
 1. In Eclipse, open the Project Explorer view. (Window → Show View → Project Explorer). Expand the project edu.gatech.mbse.modelica2sysml
 2. Double-click on the resource named **mdsysmlmodelica.launch**
-3. Edit the before last line (line 19) to edit the md.plugins.dir Java system property (at the end of the long line) to refer to the location of your local edu.gatech.mbse.mdsysmlmodelica Git repository. (For example, if the Git repo is located on your file system at ```C:\Users\Axel\git\edu.gatech.mbse.mdsysmlmodelica-feb19-2016```, then edit the md.plugins.dir Java system property to refer to ```C:\\Users\\Axel\\git\\edu.gatech.mbse.mdsysmlmodelica-feb19-2016```. Make sure to carefully replace the default path location with your location while considering these rules:
+3. Edit the before last line (line 19) to edit the md.plugins.dir Java system property (at the end of the long line) to refer to the location of your local edu.gatech.mbse.mdsysmlmodelica Git repository. (For example, if the Git repo is located on your file system at ```text C:\Users\Axel\git\edu.gatech.mbse.mdsysmlmodelica-feb19-2016```, then edit the md.plugins.dir Java system property to refer to ```text C:\\Users\\Axel\\git\\edu.gatech.mbse.mdsysmlmodelica-feb19-2016```. Make sure to carefully replace the default path location with your location while considering these rules:
 	1. Make sure to include a double backslash for every slash in the path location (Example: "gitrepos\myrepo" -> "gitrepos\\myrepo")
-	2. Make sure to include a semicolon (;) to separate your path entry from others and to include the following character sequence to end the path entry: (&quot;"/>). 
+	2. Make sure to include a semicolon (;) to separate your path entry from others and to include the following character sequence to end the path entry: ```text (&quot;"/>)```. 
 
 
  
