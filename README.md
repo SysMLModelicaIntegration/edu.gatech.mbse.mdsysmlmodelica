@@ -23,9 +23,10 @@ Requirements:
 2.	Create the OPENMODELICA Environment variable if it has not been created through the installation of the OpenModelicaCompiler. On Windows 7, Start->Control Panel->System and Security-> Advanced System Settings->Environment Variables. Define OPENMODELICAHOME to point to drive:\path\to\your\OpenModelica-X.Y.Z\ (e.g. C:\OpenModelica1.9.3\). Restart your computer.
 3.	Unzip the org.gt.mbse.mdsysml2modelica.zip and org.gt.mbse.modelica2mdsysml.zip files. Place the unzipped folders in the plugins folder of your MagicDraw installation directory (e.g. C:\Program Files\MagicDraw UML\plugins).
 4.	Launch the MagicDraw application. Disable plugin "Caliber Integration" if available through Options->Environment->Plugins. Otherwise, there will be a problem with the Corba connection that OMC needs to set up. Restart MagicDraw after disabling the "Caliber Integration" plugin.
-5.	Next it is necessary to import the SysML4Modelica profile as a module within a new and empty MagicDraw SysML project. 
+5.	Next it is necessary to import the SysML4Modelica profile as a module within a new and empty MagicDraw SysML project. Download  [ModelicaImportTest.mdzip](/edu.gatech.mbse.mdsysml2modelica/MagicDraw%20Projects/ModelicaImportTest.mdzip). Click on Raw to download the file.
 
-Download ModelicaImportTest.mdzip available on GitHub at https://github.com/SysMLModelicaIntegration/edu.gatech.mbse.mdsysmlmodelica/blob/master/edu.gatech.mbse.mdsysmlmodelica/MagicDraw%20Projects/ModelicaImportTest.mdzip  Click on Raw to download the file.
+
+available on GitHub at https://github.com/SysMLModelicaIntegration/edu.gatech.mbse.mdsysmlmodelica/blob/master/edu.gatech.mbse.mdsysmlmodelica/MagicDraw%20Projects/ModelicaImportTest.mdzip  
 
 Download sysml4modelicaprofile.mdzip available on GitHub at https://github.com/SysMLModelicaIntegration/edu.gatech.mbse.mdsysmlmodelica/blob/master/edu.gatech.mbse.mdsysmlmodelica/MagicDraw%20Projects/sysml4modelicaprofile.mdzip    Click on Raw to download the file.
 
