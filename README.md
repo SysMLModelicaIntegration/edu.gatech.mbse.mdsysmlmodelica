@@ -76,10 +76,21 @@ Eclipse IDE for Java EE Developers package).
 ### 5.	Configuring the launch configuration 
 
 1. In Eclipse, open the Project Explorer view. (Window → Show View → Project Explorer). Expand the project edu.gatech.mbse.modelica2sysml
-2. Double-click on the resource named **mdsysmlmodelica.launch**
-3. Edit the before last line (line 19) to edit the md.plugins.dir Java system property (at the end of the long line) to refer to the location of your local edu.gatech.mbse.mdsysmlmodelica Git repository. (For example, if the Git repo is located on your file system at ```text C:\Users\Axel\git\edu.gatech.mbse.mdsysmlmodelica-feb19-2016```, then edit the md.plugins.dir Java system property to refer to ```text C:\\Users\\Axel\\git\\edu.gatech.mbse.mdsysmlmodelica-feb19-2016```. Make sure to carefully replace the default path location with your location while considering these rules:
-	1. Make sure to include a double backslash for every slash in the path location (Example: "gitrepos\myrepo" -> "gitrepos\\myrepo")
-	2. Make sure to include a semicolon (;) to separate your path entry from others and to include the following character sequence to end the path entry: ```text (&quot;"/>)```. 
+2. Double-click on the resource named *mdsysmlmodelica.launch*
+3. Edit the before last line (line 19) to edit the md.plugins.dir Java system property (at the end of the long line) to refer to the location of your local edu.gatech.mbse.mdsysmlmodelica Git repository. (For example, if the Git repo is located on your file system at
+ ```text 
+C:\Users\Axel\git\edu.gatech.mbse.mdsysmlmodelica-feb19-2016
+```
+, then edit the md.plugins.dir Java system property to refer to 
+ ```text 
+C:\\Users\\Axel\\git\\edu.gatech.mbse.mdsysmlmodelica-feb19-2016
+```
+. Make sure to carefully replace the default path location with your location while considering these rules:
+	1. Make sure to include a double backslash for every slash in the path location (Example: "gitrepos\myrepo" -> "gitrepos\\\\myrepo")
+	2. Make sure to include a semicolon (;) to separate your path entry from others and to include the following character sequence to end the path entry: 
+ ```text
+&quot;"/>
+```
 
 
  
