@@ -69,9 +69,9 @@ Eclipse IDE for Java EE Developers package).
 ### 5.	Configuring projects 
 
 1. It is necessary to specify the location of the MagicDraw jars. In Eclipse, open the Project Explorer view. (Window → Show View → Project Explorer). For both the edu.gatech.mbse.modelica2sysml and the edu.gatech.mbse.mdsysml2modelica projects, do the following:
-2. Expand the project
-2. Right-click on the resource named *MAGIC_DRAW_INSTALL_DIRECTORY*
-3. Edit the location of the linked resources to point to your MagicDraw installation directory (for example C:\Program Files\MagicDraw18-2)
+	1. Expand the project
+	2. Right-click on the resource named *MAGIC_DRAW_INSTALL_DIRECTORY*
+	3. Edit the location of the linked resources to point to your MagicDraw installation directory (for example C:\Program Files\MagicDraw18-2)
 
 ### 5.	Configuring the launch configuration 
 
