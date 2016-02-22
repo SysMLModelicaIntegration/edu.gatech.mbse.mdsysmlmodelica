@@ -1,7 +1,7 @@
 #MagicDraw SysML plugin for Modelica
 ===============================
 
-Java-based implementation of the OMG SysML-Modelica Transformation (SyM) using MagicDraw SysML
+Java-based implementation of the OMG SysML-Modelica Transformation (SyM) using MagicDraw SysML v18.v2 or more recent version
 
 
 ##Instructions to install and execute the roundtrip SysML-Modelica transformation
@@ -33,7 +33,7 @@ Requirements:
 4.	Also download the associated SysML4Modelica profile. Download  [sysml4modelicaprofile.mdzip](/edu.gatech.mbse.mdsysml2modelica/MagicDraw%20Projects/sysml4modelicaprofile.mdzip). Click on Raw to download the file. 
 5.	2 Options
 	1. Option A: Place the sysml4modelicaprofile.mdzip file in the same folder as the ModelicaImportTest.mdzip file. This is necessary as the ModelicaImportTest model refers to the sysml4modelicaprofile profile. Open the empty ModelicaImportTest.mdzip model. 
-	2. Option B: Create a new SysML project in MagicDraw (if possible with MagicDraw 17.0) with File->New Project-> Create SysML project. Click on the Options menu. Select “use Module”. Choose the SysML4Modelica profile. Click Next. In the field “Module Packages”, the SysML4Modelica package should be displayed. If yes, make sure that it is marked and click on “Finish”. This new empty SysML project with the SysML4Modelica profile as module should be saved. It can then be reused on future occasions as a MagicDraw project that is ready to directly import a Modelica model.
+	2. Option B: Create a new SysML project in MagicDraw with File->New Project-> Create SysML project. Click on the Options menu. Select “use Module”. Choose the SysML4Modelica profile. Click Next. In the field “Module Packages”, the SysML4Modelica package should be displayed. If yes, make sure that it is marked and click on “Finish”. This new empty SysML project with the SysML4Modelica profile as module should be saved. It can then be reused on future occasions as a MagicDraw project that is ready to directly import a Modelica model.
 6. You are now ready to import a Modelica model into the MagicDraw SysML project. Go on Data (right click)->Modelica to SysML->Import Modelica. Select the Modelica .mo file. Sample Modelica files such as TwoTankExample.mo, InverseModel.mo and fullRobot.mo can be found [here](/edu.gatech.mbse.mdsysml2modelica/Modelica%20models)
 7. After having imported a Modelica model into SysML, it is possible to automatically create the IBD. Select the Modelica class which contains connectors and then Right mouse->New Diagram->SysML Internal Block Diagram and then choose your favorite layout. Some manual refactoring will most likely still be necessary to make it look nice
 8. **After having imported a Modelica model into SysML, or once a SysML4Modelica model is available in MagicDraw, it can be exported into Modelica**. Select “Data” or a Modelica package that should be exported and right click and select SysML to Modelica->Generate Modelica. The generated Modelica model will be located in the MagicDraw installation directory and be named “generated_Modelica.mo”. If the generated Modelica model is not visible in the MagicDraw installation directory, it couldn’t be created because of user rights. Make sure to launch MagicDraw with administrator rights. 
