@@ -74,17 +74,17 @@ Eclipse IDE for Java EE Developers package).
 1. In Eclipse, open the Project Explorer view. (Window → Show View → Project Explorer). Expand the project edu.gatech.mbse.modelica2sysml
 2. Double-click on the resource named *mdsysmlmodelica.launch*
 3. Edit the before last line (line 19) to edit the md.plugins.dir Java system property (at the end of the long line) to refer to the location of your local edu.gatech.mbse.mdsysmlmodelica Git repository. (For example, if the Git repo is located on your file system at
- ```text 
+  ```text 
 C:\Users\Axel\git\edu.gatech.mbse.mdsysmlmodelica-feb19-2016
 ```
 , then edit the md.plugins.dir Java system property to refer to 
- ```text 
+  ```text 
 C:\\Users\\Axel\\git\\edu.gatech.mbse.mdsysmlmodelica-feb19-2016
 ```
 . Make sure to carefully replace the default path location with your location while considering these rules:
 	1. Make sure to include a double backslash for every slash in the path location (Example: "gitrepos\myrepo" -> "gitrepos\\\\myrepo")
 	2. Make sure to include a semicolon (;) to separate your path entry from others and to include the following character sequence to end the path entry: 
- ```text
+  ```text
 &quot;"/>
 ```
 ####6. Running MagicDraw with Modelica plugins 
@@ -113,21 +113,6 @@ Select the *mdsysmlmodelica.launch* launch configuration (Run -> Run Configurati
 
 
 
-### 6.	Running MagicDraw with Modelica plugins 
 
-
-2. Next it is necessary to import the SysML4Modelica profile as a module within a new and empty MagicDraw SysML project. The SysML4Modelica profile is located in the org.gt.mbse.mdsysmlmodelica project under \MagicDraw Projects. It can be copied into a more appropriate folder like the \Documents\MagicDraw Projects folder.
-
-
-9.	Create a new SysML project in MagicDraw (if possible with MagicDraw 17.0) with File->New Project-> Create SysML project. Click on the Options menu. Select “use Module”. Choose the SysML4Modelica profile. Click Next. In the field “Module Packages”, the SysML4Modelica package should be displayed. If yes, make sure that it is marked and click on “Finish”. This new empty SysML project with the SysML4Modelica profile as module should be saved. It can then be reused on future occasions as a MagicDraw project that is ready to directly import a Modelica model.
- 	 	 
-
-10.	You are now ready to import a Modelica model into the MagicDraw SysML project. Go on Data (right click)->Modelica to SysML->Import Modelica. Select the Modelica .mo file. 
-
- 	 	 
-
-
-11.	After having imported a Modelica model into SysML, or once a SysML4Modelica model is available in MagicDraw, it can be exported into Modelica. Select “Data” or a Modelica package that should be exported and right click and select SysML to Modelica->Generate Modelica. The generated Modelica model will be located in the Eclipse workspace in the org.gt.mbse.mdsysmlmodelica project and be named “generated_Modelica.mo”
- 
 
 
