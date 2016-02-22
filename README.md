@@ -1,7 +1,11 @@
 #MagicDraw SysML plugin for Modelica
 ===============================
 
-Java-based implementation of the OMG SysML-Modelica Transformation (SyM) using MagicDraw SysML v18.v2 or more recent version
+Java-based implementation of the OMG SysML-Modelica Transformation (SyM) using [MagicDraw SysML v18.v2](http://www.nomagic.com/news/new-noteworthy/magicdraw-noteworthy/magicdraw-18-2-fr/magicdraw-18-2-fr-all.html) or more recent version, and [OpenModelica 1.9.3](https://openmodelica.org/newss/162-september-8-openmodelica-193-released)
+
+<p>
+  <img height="600" src="edu.gatech.mbse.modelica2sysml/documentation/images/sysml4modelica.PNG"/>
+</p>
 
 
 ##Instructions to install and execute the roundtrip SysML-Modelica transformation
