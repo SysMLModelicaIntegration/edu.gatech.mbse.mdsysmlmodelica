@@ -50,7 +50,7 @@ Eclipse IDE for Java EE Developers package).
 2.	Click on the Clone Repository icon  
 3.	In the URI field, paste the following URL: https://github.com/SysMLModelicaIntegration/edu.gatech.mbse.mdsysmlmodelica.git 
 4.	The Host and Repository fields will autofill. 
-5.	Click Next, only select the master branch
+5.	Click Next, select the **magicdraw-v18.2** branch if you are using MagicDraw 18.2. Choose **before-magicdraw-v18.2** branch if you are using a MagicDraw version older than 18.1. 
 6.	Click Next until Finish.
 
 
