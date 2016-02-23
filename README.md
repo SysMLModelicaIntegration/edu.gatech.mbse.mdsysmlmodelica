@@ -13,13 +13,6 @@ Java-based implementation of the OMG SysML-Modelica Transformation (SyM) using [
 By Axel Reichwein, February 22, 2016
 
 
-
-Requirements: 
-•	SysML-Modelica Transformation May-31-2012.zip 
-•	org.gt.mbse.mdsysml2modelica.zip 
-•	org.gt.mbse.modelica2mdsysml.zip 
-
-
 ###Installing OpenModelica
 
 1. Install the OpenModelicaCompiler 1.9.3 at: https://build.openmodelica.org/omc/builds/windows/releases/1.9.3/. Install it under C:\ since there may be some problems if you install it somewhere else.
@@ -37,7 +30,7 @@ Overview: There are two usage modes to run the bidirectional SysML-Modelica tran
 
 ####User Mode
 
-1. Unzip the org.gt.mbse.mdsysml2modelica.zip and org.gt.mbse.modelica2mdsysml.zip files. Place the unzipped folders in the plugins folder of your MagicDraw installation directory (e.g. C:\Program Files\MagicDraw UML\plugins).
+1. Unzip the [edu.gatech.mbsec.magicdraw.plugin.sysml2modelica.zip]() and [edu.gatech.mbsec.magicdraw.plugin.modelica2sysml.zip]() files. Place the unzipped folders in the plugins folder of your MagicDraw installation directory (e.g. C:\Program Files\MagicDraw UML\plugins).
 2. Launch the MagicDraw application. 
 
 ####Developer mode 
