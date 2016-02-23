@@ -30,7 +30,7 @@ Overview: There are two usage modes to run the bidirectional SysML-Modelica tran
 
 ####User Mode
 
-1. Unzip the [edu.gatech.mbsec.magicdraw.plugin.modelica2sysml.zip](/edu.gatech.mbse.modelica2sysml/MagicDraw%20plugins/edu.gatech.mbsec.magicdraw.plugin.modelica2sysml.zip) and [edu.gatech.mbsec.magicdraw.plugin.sysml2modelica.zip](edu.gatech.mbse.modelica2sysml/MagicDraw%20plugins/edu.gatech.mbsec.magicdraw.plugin.sysml2modelica.zip) files as folders. Place the unzipped folders in the plugins folder of your MagicDraw installation directory (e.g. C:\Program Files\MagicDraw UML\plugins).
+1. Download and unzip the [edu.gatech.mbsec.magicdraw.plugin.modelica2sysml.zip](/edu.gatech.mbse.modelica2sysml/MagicDraw%20plugins/edu.gatech.mbsec.magicdraw.plugin.modelica2sysml.zip) and [edu.gatech.mbsec.magicdraw.plugin.sysml2modelica.zip](edu.gatech.mbse.modelica2sysml/MagicDraw%20plugins/edu.gatech.mbsec.magicdraw.plugin.sysml2modelica.zip) files as folders. Click on Raw to download the files. Place the unzipped folders in the plugins folder of your MagicDraw installation directory (e.g. C:\Program Files\MagicDraw UML\plugins).
 2. Launch the MagicDraw application. 
 
 ####Developer mode 
