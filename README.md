@@ -97,7 +97,7 @@ Select the *mdsysmlmodelica.launch* launch configuration (Run -> Run Configurati
 
 ### Exporting MagicDraw SysML models into  Modelica
 
-**After having imported a Modelica model into SysML, or once a SysML4Modelica model is available in MagicDraw, it can be exported into Modelica**. Select “Data” or a Modelica package that should be exported and right click and select SysML to Modelica->Generate Modelica. The generated Modelica model will be located in the MagicDraw installation directory and be named “generated_Modelica.mo”. If the generated Modelica model is not visible in the MagicDraw installation directory, it couldn’t be created because of user rights. Make sure to launch MagicDraw with administrator rights. 
+**After having imported a Modelica model into SysML, or once a SysML4Modelica model is available in MagicDraw, it can be exported into Modelica**. Select “Data” or a Modelica package that should be exported and right click and select SysML to Modelica->Generate Modelica. The generated Modelica model will be located in the MagicDraw installation directory and be named “generated_Modelica.mo”. If the generated Modelica model is not visible in the MagicDraw installation directory, it may not have been be created because of user rights. Make sure to launch MagicDraw with administrator rights. 
 
 
 
