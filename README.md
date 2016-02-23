@@ -15,7 +15,7 @@ By Axel Reichwein, February 22, 2016
 
 ###Installing OpenModelica
 
-1. Install the [OpenModelicaCompiler 1.9.3](https://build.openmodelica.org/omc/builds/windows/releases/1.9.3/). Install it under C:\ since there may be some problems if you install it somewhere else.
+1. Install [OpenModelicaCompiler 1.9.3](https://build.openmodelica.org/omc/builds/windows/releases/1.9.3/). Install it under C:\ since there may be some problems if you install it somewhere else.
 2. Create the OPENMODELICA Environment variable if it has not been created through the installation of the OpenModelicaCompiler. On Windows 7, Start->Control Panel->System and Security-> Advanced System Settings->Environment Variables. Define OPENMODELICAHOME to point to drive:\path\to\your\OpenModelica-X.Y.Z\ (e.g. C:\OpenModelica1.9.3\). 
 3. Restart your computer.
 
