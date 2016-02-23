@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin
+        id="edu.gatech.mbse.mdsysml2modelica"
+        name="edu.gatech.mbse.mdsysml2modelica"
+        version="1.0"
+        provider-name="GaTech"
+        class="sysml2mo.SysML2ModelicaPlugin">
+
+    <requires>
+        <api version="1.2"/>
+    </requires>
+
+    <runtime>
+        <library name="sysml2modelica.jar"/>
+    </runtime>
+</plugin>
