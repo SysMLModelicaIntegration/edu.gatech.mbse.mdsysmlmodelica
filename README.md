@@ -15,7 +15,7 @@ By Axel Reichwein, February 22, 2016
 
 ###Installing OpenModelica
 
-1. Install the OpenModelicaCompiler 1.9.3 at: https://build.openmodelica.org/omc/builds/windows/releases/1.9.3/. Install it under C:\ since there may be some problems if you install it somewhere else.
+1. Install the [OpenModelicaCompiler 1.9.3](https://build.openmodelica.org/omc/builds/windows/releases/1.9.3/). Install it under C:\ since there may be some problems if you install it somewhere else.
 2. Create the OPENMODELICA Environment variable if it has not been created through the installation of the OpenModelicaCompiler. On Windows 7, Start->Control Panel->System and Security-> Advanced System Settings->Environment Variables. Define OPENMODELICAHOME to point to drive:\path\to\your\OpenModelica-X.Y.Z\ (e.g. C:\OpenModelica1.9.3\). 
 3. Restart your computer.
 
@@ -30,7 +30,7 @@ Overview: There are two usage modes to run the bidirectional SysML-Modelica tran
 
 ####User Mode
 
-1. Unzip the [edu.gatech.mbsec.magicdraw.plugin.sysml2modelica.zip]() and [edu.gatech.mbsec.magicdraw.plugin.modelica2sysml.zip]() files. Place the unzipped folders in the plugins folder of your MagicDraw installation directory (e.g. C:\Program Files\MagicDraw UML\plugins).
+1. Unzip the [edu.gatech.mbsec.magicdraw.plugin.modelica2sysml.zip](/edu.gatech.mbse.modelica2sysml/MagicDraw%20plugins/edu.gatech.mbsec.magicdraw.plugin.modelica2sysml.zip) and [edu.gatech.mbsec.magicdraw.plugin.sysml2modelica.zip](edu.gatech.mbse.modelica2sysml/MagicDraw%20plugins/edu.gatech.mbsec.magicdraw.plugin.sysml2modelica.zip) files as folders. Place the unzipped folders in the plugins folder of your MagicDraw installation directory (e.g. C:\Program Files\MagicDraw UML\plugins).
 2. Launch the MagicDraw application. 
 
 ####Developer mode 
