@@ -59,7 +59,7 @@ Eclipse IDE for Java EE Developers package).
 1.	In the Git repositories view, right-click edu.gatech.mbse.mdsysmlmodelica and select “Import Projects”. Click Next until Finish
 2.	The 2 projects are in the Eclipse workspace
 
-####4. Configuring projects 
+####4. Configuring Java classpath 
 
 1. It is necessary to specify the location of the MagicDraw jars. In Eclipse, open the Project Explorer view. (Window → Show View → Project Explorer). For both the edu.gatech.mbse.modelica2sysml and the edu.gatech.mbse.mdsysml2modelica projects, do the following:
 	1. Expand the project
